@@ -49,7 +49,7 @@
                         <dl class="layui-nav-child">
                             <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goUserList" target="right">用户管理</a>
                             </dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
+                            <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goCategoryList"
                                                                                 target="right">分类管理</a></dd>
                             <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
                                                                                 target="right">菜品管理</a></dd>

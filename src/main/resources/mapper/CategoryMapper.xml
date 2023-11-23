@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holary.mapper.CategoryMapper">
+    <!--查询分类-->
+    <select id="selectAll" resultType="category">
+        select *
+        from category
+        order by sort, update_time desc
+    </select>
+
+    <!--根据分类名称查询分类-->
+    <select id="selectByName" resultType="category">
+        select *
+        from category
+        where name = #{name}
+    </select>
+
+    <!--添加分类-->
+    <insert id="insert">
+        insert into category(name, sort, create_time, update_time)
+        values (#{name}, #{sort}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!--根据分类id查询分类信息-->
+    <select id="selectById" resultType="category">
+        select *
+        from category
+        where id = #{id}
+    </select>
+
+    <!--根据分类id和分类名称查询分类-->
+    <select id="selectByIdAndName" resultType="category">
+        select *
+        from category
+        where name = #{name}
+          and id != #{id}
+    </select>
+
+    <!--根据分类id修改分类-->
+    <update id="updateById">
+        update category
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--根据id删除分类-->
+    <delete id="deleteById">
+        delete
+        from category
+        where id = #{id}
+    </delete>
+</mapper>

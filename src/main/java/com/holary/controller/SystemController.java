@@ -50,4 +50,24 @@ public class SystemController {
     public String goUserList() {
         return "admin/user-list";
     }
+
+    /**
+     * description:跳转分类列表
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goCategoryList")
+    public String goCategoryList() {
+        return "admin/category-list";
+    }
+
+    /**
+     * description: 跳转添加分类
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goCategoryAdd")
+    public String goCategoryAdd() {
+        return "admin/category-add";
+    }
 }
