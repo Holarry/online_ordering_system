@@ -48,9 +48,6 @@
             <if test="sort != null">
                 sort = #{sort},
             </if>
-            <if test="status != null">
-                status = #{status},
-            </if>
             <if test="updateTime != null">
                 update_time = #{updateTime}
             </if>

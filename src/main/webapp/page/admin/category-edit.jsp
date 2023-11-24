@@ -43,22 +43,6 @@
         </div>
 
         <div class="layui-form-item">
-            <label for="status" class="layui-form-label">状态</label>
-            <div class="layui-input-inline">
-                <select id="status" name="status">
-                    <c:if test="${category.status == 1}">
-                        <option value="上架" selected>上架</option>
-                        <option value="下架">下架</option>
-                    </c:if>
-                    <c:if test="${category.status == 0}">
-                        <option value="上架">上架</option>
-                        <option value="下架" selected>下架</option>
-                    </c:if>
-                </select>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label"></label>
             <input type="button" id="L_repass" class="layui-btn-primary" value="修改"
                    onclick="editCategory()">
@@ -72,21 +56,12 @@
         let id = ${category.id};
         let name = $('#name').val();
         let sort = $('#sort').val();
-        let status = $('#status').val();
-
-        // 转换status
-        if (status === '上架') {
-            status = 1;
-        } else {
-            status = 0;
-        }
 
         // 构造分类对象
         let category = {
             id: id,
             name: name,
             sort: sort,
-            status: status
         }
 
         $.ajax({

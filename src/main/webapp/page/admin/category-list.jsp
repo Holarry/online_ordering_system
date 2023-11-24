@@ -33,16 +33,15 @@
         </form>
     </div>
 
-    <table class="layui-table" style="margin-top: 0;text-align: center;width: auto">
+    <table class="layui-table" style="margin-top: 0;text-align: center;">
         <thead>
         <tr>
             <td>编号</td>
             <td>分类名称</td>
             <td>排序</td>
-            <td>状态</td>
-            <td style="width: 200px">创建时间</td>
-            <td style="width: 200px">修改时间</td>
-            <td style="width: 200px">操作</td>
+            <td>创建时间</td>
+            <td>修改时间</td>
+            <td>操作</td>
         </tr>
         </thead>
         <tbody id="tab"></tbody>
@@ -64,17 +63,10 @@
                 if (categoryList.length > 0) {
                     let str = ''; // 用str变量拼接字符串
                     for (let i = 0; i < categoryList.length; i++) {
-                        let status;
-                        if (categoryList[i].status === 1) {
-                            status = '上架';
-                        } else {
-                            status = '下架';
-                        }
                         str += '<tr>' +
                             '<td>' + (i + 1) + '</td>' +
                             '<td>' + categoryList[i].name + '</td>' +
                             '<td>' + categoryList[i].sort + '</td>' +
-                            '<td>' + status + '</td>' +
                             '<td>' + categoryList[i].createTime + '</td>' +
                             '<td>' + categoryList[i].updateTime + '</td>' +
                             '<td class="td-manage">' +
@@ -85,7 +77,7 @@
                     }
                     $("#tab").html(str);
                 } else {
-                    $("#tab").html('<tr><td colspan="7" align="center">没有分类数据</td></tr>');
+                    $("#tab").html('<tr><td colspan="6" align="center">没有分类数据</td></tr>');
                 }
             }, error: function () {
                 alert("查询分类失败!");
@@ -102,7 +94,7 @@
                 id: categoryId
             }, success: function () {
                 // 处理编辑操作
-                x_admin_show('编辑分类', '/admin/category/getDetailInfo?id=' + categoryId, 500, 325);
+                x_admin_show('编辑分类', '/admin/category/getDetailInfo?id=' + categoryId, 500, 275);
             }, error: function () {
                 alert("获取分类信息失败!");
             }
