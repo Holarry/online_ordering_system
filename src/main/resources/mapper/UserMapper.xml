@@ -17,9 +17,6 @@
                 and status = #{status}
             </if>
         </where>
-        <!--<if test="username != null and username != ''">-->
-        <!--    where username like concat('%', #{username}, '%')-->
-        <!--</if>-->
     </select>
 
     <!--根据用户名查询用户-->

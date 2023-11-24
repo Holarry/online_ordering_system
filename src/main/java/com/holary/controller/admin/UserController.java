@@ -33,7 +33,6 @@ public class UserController {
     @RequestMapping("/list")
     @ResponseBody
     public Map<String, Object> list(int pageNum, int pageSize, String username, String gender, Integer status) {
-        System.out.println(username + "---" + gender + "---" + status);
         return userService.list(pageNum, pageSize, username, gender, status);
     }
 
