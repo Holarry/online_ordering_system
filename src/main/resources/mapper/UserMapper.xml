@@ -6,9 +6,20 @@
     <!--条件查询用户-->
     <select id="selectAll" resultType="user">
         select * from user
-        <if test="username != null and username != ''">
-            where username like concat('%', #{username}, '%')
-        </if>
+        <where>
+            <if test="username != null and username != ''">
+                username like concat('%', #{username}, '%')
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        <!--<if test="username != null and username != ''">-->
+        <!--    where username like concat('%', #{username}, '%')-->
+        <!--</if>-->
     </select>
 
     <!--根据用户名查询用户-->

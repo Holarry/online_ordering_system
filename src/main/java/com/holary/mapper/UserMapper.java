@@ -17,7 +17,7 @@ public interface UserMapper {
      * @param username: 用户名
      * @return: java.util.List<com.com.holary.entity.User>
      */
-    List<User> selectAll(String username);
+    List<User> selectAll(@Param("username") String username, @Param("gender") String gender, @Param("status") Integer status);
 
     /**
      * description: 根据用户名查询用户

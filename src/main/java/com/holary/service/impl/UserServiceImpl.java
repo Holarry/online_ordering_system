@@ -35,10 +35,10 @@ public class UserServiceImpl implements UserService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     @Override
-    public Map<String, Object> list(int pageNum, int pageSize, String username) {
+    public Map<String, Object> list(int pageNum, int pageSize, String username, String gender, Integer status) {
         // 开启分页插件
         PageHelper.startPage(pageNum, pageSize);
-        List<User> userList = userMapper.selectAll(username);
+        List<User> userList = userMapper.selectAll(username, gender, status);
         PageInfo<User> userPageInfo = new PageInfo<>(userList);
 
         HashMap<String, Object> userMap = new HashMap<>();

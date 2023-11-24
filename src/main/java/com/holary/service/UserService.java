@@ -18,7 +18,7 @@ public interface UserService {
      * @param username: 用户名
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    Map<String, Object> list(int pageNum, int pageSize, String username);
+    Map<String, Object> list(int pageNum, int pageSize, String username, String gender, Integer status);
 
     /**
      * description: 根据用户id查询用户信息

@@ -35,18 +35,35 @@
             </button>
 
             <%--模糊查询--%>
-            <label for="queryUser">
-                <input type="text" placeholder="请输入用户名" id="queryUser" autocomplete="off" class="layui-input">
-                <button class="layui-btn" type="button" onclick="selectUserByUsername()">
+            <div style="margin-left: 440px; display: flex; align-items: center;">
+                <label for="username">
+                    <input type="text" placeholder="请输入用户名" id="username" autocomplete="off"
+                           class="layui-input"
+                           style="margin-right: 20px;">
+                </label>
+                <label for="gender">
+                    <select id="gender" style="margin-right: 20px;">
+                        <option value="">性别</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </label>
+                <div style="margin-right: 20px"></div>
+                <label for="status">
+                    <select id="status">
+                        <option value="">状态</option>
+                        <option value="正常">正常</option>
+                        <option value="禁用">禁用</option>
+                    </select>
+                </label>
+                <button class="layui-btn" type="button" style="margin-left: 20px" onclick="selectUserByUsername()">
                     <i class="layui-icon layui-icon-search"></i>
                 </button>
-            </label>
-
-            <%--刷新--%>
-            <a class="layui-btn layui-btn-normal" style="float: right"
-               href="javascript:location.replace(location.href);" title="刷新">
-                <i class="layui-icon layui-icon-refresh"></i>
-            </a>
+                <button class="layui-btn layui-btn-primary layui-border-green" type="button"
+                        onclick="clearSelected()">
+                    重置
+                </button>
+            </div>
         </form>
     </div>
 
@@ -78,9 +95,11 @@
     // 解决enter键问题
     $(document).ready(function enterJudge() {
         $(this).keydown(function (e) {
-            if (e.which === "13" && $("#queryUser").val() !== '') {
-                selectUserByUsername();
-                return false;
+            if (e.which === 13) {
+                if ($("#username").val() !== '' || $("#gender").val() !== '' || $("#status").val() !== '') {
+                    selectUserByUsername();
+                    return false;
+                }
             }
         })
     })
@@ -119,6 +138,14 @@
 
     //全查
     function selectAll(number) {
+        let status = $("#status").val();
+        if (status === '正常') {
+            status = 1;
+        } else if (status === '禁用') {
+            status = 0;
+        } else {
+            status = null;
+        }
         $.ajax({
             url: "../admin/user/list",
             dataType: "JSON",
@@ -127,7 +154,9 @@
             data: {
                 pageNum: number,
                 pageSize: 5,
-                username: $("#queryUser").val(),
+                username: $("#username").val(),
+                gender: $("#gender").val(),
+                status: status
             }, success: function (data) {
                 // 取出返回数据中用户数据
                 let userList = data.paging.list;
@@ -194,6 +223,18 @@
                 selectAll(number);
             }
         })
+    }
+
+    // 重置
+    function clearSelected() {
+        // 清空用户名输入框
+        $("#username").val('');
+        // 清空性别和状态选择框
+        $("#gender").val("");
+        $("#status").val("");
+        $("form")[0].reset();
+
+        selectUserByUsername();
     }
 
     // 修改用户
