@@ -56,7 +56,7 @@
                         <option value="禁用">禁用</option>
                     </select>
                 </label>
-                <button class="layui-btn" type="button" style="margin-left: 20px" onclick="selectUserByUsername()">
+                <button class="layui-btn" type="button" style="margin-left: 20px" onclick="selectUserByCondition()">
                     <i class="layui-icon layui-icon-search"></i>
                 </button>
                 <button class="layui-btn layui-btn-primary layui-border-green" type="button"
@@ -97,7 +97,7 @@
         $(this).keydown(function (e) {
             if (e.which === 13) {
                 if ($("#username").val() !== '' || $("#gender").val() !== '' || $("#status").val() !== '') {
-                    selectUserByUsername();
+                    selectUserByCondition();
                     return false;
                 }
             }
@@ -198,13 +198,13 @@
                     $("#tab").html('<tr><td colspan="9" align="center">没有用户数据</td></tr>');
                 }
             }, error: function () {
-                alert("查询用户失败!");
+                alert("访问用户接口失败!");
             }
         })
     }
 
     // 条件查询
-    function selectUserByUsername() {
+    function selectUserByCondition() {
         // 初始化
         selectAll(1);
         // 加载数据
@@ -233,8 +233,7 @@
         $("#gender").val("");
         $("#status").val("");
         $("form")[0].reset();
-
-        selectUserByUsername();
+        selectUserByCondition();
     }
 
     // 修改用户
@@ -282,5 +281,4 @@
             });
         });
     }
-
 </script>

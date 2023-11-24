@@ -28,6 +28,8 @@ public class UserController {
      * @param pageNum:  页码
      * @param pageSize: 条数
      * @param username: 用户名
+     * @param gender:   性别
+     * @param status:   状态
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     @RequestMapping("/list")

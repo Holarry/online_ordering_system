@@ -15,6 +15,8 @@ public interface UserMapper {
      * description: 条件查询用户
      *
      * @param username: 用户名
+     * @param gender:   性别
+     * @param status:   状态
      * @return: java.util.List<com.com.holary.entity.User>
      */
     List<User> selectAll(@Param("username") String username, @Param("gender") String gender, @Param("status") Integer status);

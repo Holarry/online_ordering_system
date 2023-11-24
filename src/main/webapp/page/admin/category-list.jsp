@@ -80,7 +80,7 @@
                     $("#tab").html('<tr><td colspan="6" align="center">没有分类数据</td></tr>');
                 }
             }, error: function () {
-                alert("查询分类失败!");
+                alert("访问分类接口失败!");
             }
         });
     }

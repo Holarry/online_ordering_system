@@ -16,6 +16,8 @@ public interface UserService {
      * @param pageNum:  页码
      * @param pageSize: 条数
      * @param username: 用户名
+     * @param gender:   性别
+     * @param status:   状态
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> list(int pageNum, int pageSize, String username, String gender, Integer status);
