@@ -70,4 +70,14 @@ public class SystemController {
     public String goCategoryAdd() {
         return "admin/category-add";
     }
+
+    /**
+     * description: 跳转菜品列表
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goDishList")
+    public String goDishList() {
+        return "/admin/dish-list";
+    }
 }

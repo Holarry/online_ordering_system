@@ -51,7 +51,7 @@
                             </dd>
                             <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goCategoryList"
                                                                                 target="right">分类管理</a></dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
+                            <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goDishList"
                                                                                 target="right">菜品管理</a></dd>
                             <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
                                                                                 target="right">订单管理</a></dd>

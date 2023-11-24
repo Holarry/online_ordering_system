@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holary.mapper.DishMapper">
+    <!--分页查询和条件查询菜品-->
+    <select id="selectAll" resultType="com.holary.dto.DishDto">
+        select
+        d.*,
+        c.name categoryName
+        from
+        dish d
+        inner join
+        category c
+        on
+        d.category_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                d.name like concat('%', #{name}, '%')
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and d.status = #{status}
+            </if>
+        </where>
+    </select>
+</mapper>
