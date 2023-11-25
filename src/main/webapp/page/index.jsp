@@ -13,12 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>首页 | 开饭啦</title>
     <!-- 引入样式 -->
+    <link rel="stylesheet" href="../static/style/index.css">
     <link rel="stylesheet" href="../static/lib/layui-2.8.18/css/layui.css">
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo layui-hide-xs layui-bg-black">在线点餐系统</div>
+    <div class="layui-nav-d layui-header">
+        <img src="../static/images/logo2.jpg" alt="图片未找到" style="margin-top:15px;margin-left:25px;width:10%"/>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
                 <a href="javascript:">
@@ -42,35 +43,58 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <ul class="layui-nav-d layui-nav layui-nav-tree layui-nav-side">
                 <shiro:hasRole name="管理员">
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:">功能菜单</a>
-                        <dl class="layui-nav-child">
-                            <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goUserList" target="right">用户管理</a>
-                            </dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goCategoryList"
-                                                                                target="right">分类管理</a></dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="../sys/goDishList"
-                                                                                target="right">菜品管理</a></dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
-                                                                                target="right">订单管理</a></dd>
-                        </dl>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="../sys/goUserList" target="right" style="margin-top: 120px">
+                            <i class="layui-icon layui-icon-user"></i>
+                            <span>用户管理</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="../sys/goCategoryList" target="right">
+                            <i class="layui-icon layui-icon-app"></i>
+                            <span>分类管理</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="../sys/goDishList" target="right">
+                            <i class="layui-icon layui-icon-console"></i>
+                            <span>菜品管理</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="javascript:" target="right">
+                            <i class="layui-icon layui-icon-notice"></i>
+                            <span>订单管理</span>
+                        </a>
                     </li>
                 </shiro:hasRole>
+
                 <shiro:hasRole name="普通用户">
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:">功能菜单</a>
-                        <dl class="layui-nav-child">
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
-                                                                                target="right">菜单列表</a></dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
-                                                                                target="right">购物车</a></dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
-                                                                                target="right">地址管理</a></dd>
-                            <dd style="margin-left: 20px; text-align: left;"><a href="javascript:"
-                                                                                target="right">我的订单</a></dd>
-                        </dl>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="javascript:" target="right" style="margin-top: 120px">
+                            <i class="layui-icon layui-icon-form"></i>
+                            <span>菜单列表</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="javascript:" target="right">
+                            <i class="layui-icon layui-icon-cart"></i>
+                            <span>购物车</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="javascript:" target="right">
+                            <i class="layui-icon layui-icon-note"></i>
+                            <span>地址管理</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="javascript:" target="right">
+                            <i class="layui-icon layui-icon-notice"></i>
+                            <span>我的订单</span>
+                        </a>
                     </li>
                 </shiro:hasRole>
             </ul>
@@ -80,15 +104,14 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <shiro:hasRole name="管理员">
-            <iframe src="../sys/goUserList" name="right"
-                    style="width: 100%; height: 98.5%; border: none; overflow: hidden;"></iframe>
+            <iframe src="../sys/goUserList" name="right"></iframe>
         </shiro:hasRole>
         <shiro:hasRole name="普通用户">
-            <iframe src="" name="right" style="width: 100%; height: 98.5%; border: none; overflow: hidden;"></iframe>
+            <iframe src="" name="right"></iframe>
         </shiro:hasRole>
     </div>
 
-    <div class="layui-footer" style="text-align: center;height: 50px">
+    <div class="layui-footer">
         <!-- 底部固定区域 -->
         <p>Copyright &copy; 2023 202020201345何林</p>
     </div>

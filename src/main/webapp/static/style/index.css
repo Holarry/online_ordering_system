@@ -1,0 +1,42 @@
+.layui-nav-d {
+    background-color: rgb(52, 55, 68) !important;
+}
+
+.layui-nav-item-d {
+    display: flex;
+    align-items: baseline;
+    width: 85% !important;
+    margin-top: 30px !important;
+    margin-left: 25px !important;
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
+    background-color: #ffc200 !important;
+    color: #333333 !important;
+    border-radius: 0 21px 21px 0 !important;
+}
+
+.layui-nav-item-d a {
+    font-family: 'Microsoft YaHei', sans-serif !important;
+    color: #fff !important;
+}
+
+.layui-nav-item-d i {
+    font-size: 18px;
+}
+
+.layui-nav-item-d span {
+    margin-left: 5px;
+}
+
+.layui-body iframe {
+    width: 100%;
+    height: 98.5%;
+    border: none;
+    overflow: hidden;
+}
+
+.layui-footer {
+    text-align: center;
+    height: 50px;
+}
