@@ -1,0 +1,44 @@
+.header-d {
+    margin: 0;
+    padding: 0;
+    display: block;
+    flex: 1;
+    flex-basis: auto;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.header-d span {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-size: 20px;
+    color: #303133;
+}
+
+.header-d button {
+    float: right;
+}
+
+hr {
+    padding: 0;
+    margin: 0;
+}
+
+.like-query {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.like-query span {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-size: 14px;
+    color: #606266;
+    margin-right: 15px;
+}
+
+.layui-table-d {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: auto;
+}

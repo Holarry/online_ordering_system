@@ -14,6 +14,7 @@
     <title>Title</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="../../static/style/list.css">
     <link rel="stylesheet" href="../../static/style/font.css">
     <link rel="stylesheet" href="../../static/style/xadmin.css">
     <link rel="stylesheet" href="../../static/lib/layui-2.8.18/css/layui.css">
@@ -25,49 +26,55 @@
 </head>
 <body>
 <div class="x-body">
-    <h2 style="text-align: center; margin-bottom: 20px; margin-top: 0;">用户列表</h2>
+    <div class="header-d">
+        <span>用户管理</span>
+        <%--添加用户--%>
+        <button class="layui-btn layui-btn-normal"
+                onclick="x_admin_show('添加用户','../sys/goUserAdd',500,450)">
+            <i class="layui-icon layui-icon-add-1"></i>添加
+        </button>
+    </div>
+    <hr>
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-            <%--添加用户--%>
-            <button class="layui-btn layui-btn-normal" style="float: left"
-                    onclick="x_admin_show('添加用户','../sys/goUserAdd',500,450)">
-                <i class="layui-icon layui-icon-add-1"></i>添加
-            </button>
-
             <%--模糊查询--%>
-            <div style="margin-left: 440px; display: flex; align-items: center;">
+            <div class="like-query">
+                <span>用户名 : </span>
                 <label for="username">
                     <input type="text" placeholder="请输入用户名" id="username" autocomplete="off"
                            class="layui-input"
                            style="margin-right: 20px;">
                 </label>
+                <span>性别 : </span>
                 <label for="gender">
-                    <select id="gender" style="margin-right: 20px;">
-                        <option value="">性别</option>
+                    <select id="gender" style="margin-right: 25px;">
+                        <option value="">请选择</option>
                         <option value="男">男</option>
                         <option value="女">女</option>
                     </select>
                 </label>
-                <div style="margin-right: 20px"></div>
+                <div style="margin-right: 25px"></div>
+                <span>状态 : </span>
                 <label for="status">
                     <select id="status">
-                        <option value="">状态</option>
+                        <option value="">请选择</option>
                         <option value="正常">正常</option>
                         <option value="禁用">禁用</option>
                     </select>
                 </label>
-                <button class="layui-btn" type="button" style="margin-left: 20px" onclick="selectUserByCondition()">
+                <button class="layui-btn layui-btn-normal" type="button" style="margin-bottom: 5px;margin-left: 25px"
+                        onclick="selectUserByCondition()">
                     <i class="layui-icon layui-icon-search"></i>
                 </button>
-                <button class="layui-btn layui-btn-primary layui-border-green" type="button"
-                        onclick="clearSelected()">
+                <button class="layui-btn layui-btn-primary layui-border-blue" type="button"
+                        style="margin-bottom: 5px;" onclick="clearSelected()">
                     重置
                 </button>
             </div>
         </form>
     </div>
 
-    <table class="layui-table" style="margin-top: 0;text-align: center;width: auto">
+    <table class="layui-table-d layui-table">
         <thead>
         <tr>
             <td>编号</td>
@@ -90,7 +97,6 @@
     </table>
 </div>
 </body>
-</html>
 <script type="text/javascript">
     // 解决enter键问题
     $(document).ready(function enterJudge() {
@@ -153,7 +159,7 @@
             async: false,
             data: {
                 pageNum: number,
-                pageSize: 5,
+                pageSize: 10,
                 username: $("#username").val(),
                 gender: $("#gender").val(),
                 status: status
@@ -167,7 +173,7 @@
                     currentPage = data.paging.pageNum;// 当前页
                     //把数据写在页面上
                     let str = ''; // 用str变量拼接字符串
-                    count = (number - 1) * 5 + 1;
+                    count = (number - 1) * 10 + 1;
                     for (let i = 0; i < userList.length; i++) {
                         let status;
                         if (userList[i].status === 1) {
@@ -282,3 +288,4 @@
         });
     }
 </script>
+</html>

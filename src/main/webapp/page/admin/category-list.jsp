@@ -5,13 +5,14 @@
   Time: 19:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="../../static/style/list.css">
     <link rel="stylesheet" href="../../static/style/font.css">
     <link rel="stylesheet" href="../../static/style/xadmin.css">
     <link rel="stylesheet" href="../../static/lib/layui-2.8.18/css/layui.css">
@@ -22,18 +23,16 @@
 </head>
 <body>
 <div class="x-body">
-    <h2 style="text-align: center; margin-bottom: 20px; margin-top: 0;">分类列表</h2>
-    <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-            <%--添加分类--%>
-            <button type="button" class="layui-btn layui-btn-normal" style="float: left"
-                    onclick="x_admin_show('添加分类','/sys/goCategoryAdd',500,275)">
-                <i class="layui-icon layui-icon-add-1"></i>添加
-            </button>
-        </form>
+    <div class="header-d">
+        <span>分类管理</span>
+        <%--添加分类--%>
+        <button class="layui-btn layui-btn-normal"
+                onclick="x_admin_show('添加分类','../sys/goCategoryAdd',500,275)">
+            <i class="layui-icon layui-icon-add-1"></i>添加
+        </button>
     </div>
-
-    <table class="layui-table" style="margin-top: 0;text-align: center;">
+    <hr>
+    <table class="layui-table-d layui-table">
         <thead>
         <tr>
             <td>编号</td>
