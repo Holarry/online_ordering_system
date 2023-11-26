@@ -1,0 +1,76 @@
+.body-d {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form-d {
+    display: block;
+    margin-top: 0;
+}
+
+.form-item-d {
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.form-item-label-d {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    font-size: 14px;
+    color: #606266;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+}
+
+.form-item-content-d {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    line-height: 32px;
+    position: relative;
+    font-size: 14px;
+    min-width: 0;
+}
+
+.form-input-d {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-size: 14px;
+    padding: 1px 11px 1px 11px;
+    border: #dcdfe6 1px solid;
+    background-color: #ffffff;
+    border-radius: 4px;
+    line-height: 30px;
+    width: 100%;
+}
+
+.form-input-inner-d {
+    width: 100%;
+    flex-grow: 1;
+    -webkit-appearance: none;
+    color: #606266;
+    font-size: inherit;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    outline: 0;
+    border: none;
+    background: 0 0;
+    box-sizing: border-box;
+}
+
+.form-upload-d {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: 0;
+    horiz-align: center;
+    vertical-align: 10px;
+}

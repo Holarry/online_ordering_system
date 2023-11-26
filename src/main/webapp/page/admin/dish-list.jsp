@@ -257,7 +257,7 @@
                 // 清空原有的选项
                 $("#categoryName").empty().append();
                 // 添加默认选项
-                $("#categoryName").append('<option value="">分类</option>');
+                $("#categoryName").append('<option value="">请选择</option>');
                 let categoryList = data.list;
                 for (let i = 0; i < categoryList.length; i++) {
                     $("#categoryName").append('<option value="' + categoryList[i].id + '">' + categoryList[i].name + '</option>');
@@ -282,6 +282,14 @@
             shadeClose: true,
             content: '<iframe src="../sys/goDishAdd" style="width: 100%; height: 100%;" frameborder="0"></iframe>'
         })
+    }
+
+    // addDishSuccessCallback 函数
+    function addDishSuccessCallback() {
+        // 关闭抽屉
+        layer.closeAll();
+        // 刷新页面数据
+        location.reload();
     }
 </script>
 </html>

@@ -26,4 +26,17 @@
             </if>
         </where>
     </select>
+
+    <!--根据菜品名称查询菜品-->
+    <select id="selectByName" resultType="dish">
+        select *
+        from dish
+        where name = #{name}
+    </select>
+
+    <!--添加菜品-->
+    <insert id="insert">
+        insert into dish(name, category_id, price, image, description, create_time, update_time)
+        VALUES (#{name}, #{categoryId}, #{price}, #{image}, #{Description}, #{createTime}, #{updateTime})
+    </insert>
 </mapper>

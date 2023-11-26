@@ -1,8 +1,10 @@
 package com.holary.controller.admin;
 
+import com.holary.entity.Dish;
 import com.holary.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,5 +35,17 @@ public class DishController {
     @ResponseBody
     public Map<String, Object> list(int pageNum, int pageSize, String name, Integer categoryId, Integer status) {
         return dishService.list(pageNum, pageSize, name, categoryId, status);
+    }
+
+    /**
+     * description: 添加菜品
+     *
+     * @param dish: dish对象
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public Map<String, Object> save(@RequestBody Dish dish) {
+        return dishService.save(dish);
     }
 }

@@ -80,4 +80,14 @@ public class SystemController {
     public String goDishList() {
         return "/admin/dish-list";
     }
+
+    /**
+     * description: 跳转添加菜品
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goDishAdd")
+    public String goDishAdd() {
+        return "/admin/dish-add";
+    }
 }

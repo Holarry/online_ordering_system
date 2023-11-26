@@ -1,5 +1,7 @@
 package com.holary.service;
 
+import com.holary.entity.Dish;
+
 import java.util.Map;
 
 /**
@@ -19,4 +21,12 @@ public interface DishService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> list(int pageNum, int pageSize, String name, Integer categoryId, Integer status);
+
+    /**
+     * description: 添加菜品
+     *
+     * @param dish: dish对象
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> save(Dish dish);
 }
