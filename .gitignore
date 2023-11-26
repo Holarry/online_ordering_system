@@ -14,6 +14,7 @@ target/
 **/src/main/java/com/holary/test
 **/src/main/resources/config
 .idea
+**/src/main/java/com/holary/config
 
 ### Eclipse ###
 .apt_generated
@@ -40,3 +41,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/
+/src/main/java/com/holary/config/
