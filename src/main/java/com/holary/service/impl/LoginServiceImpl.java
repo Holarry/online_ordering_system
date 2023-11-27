@@ -44,6 +44,11 @@ public class LoginServiceImpl implements LoginService {
         //判断当前用户是否已经登录
         if (!subject.isAuthenticated()) {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            if (username.isEmpty() || password.isEmpty()) {
+                result.put("code", -1);
+                result.put("message", "用户名或密码为空!");
+                return result;
+            }
             try {
                 subject.login(token);
             } catch (UnknownAccountException e) {
@@ -52,7 +57,7 @@ public class LoginServiceImpl implements LoginService {
                 return result;
             } catch (IncorrectCredentialsException e) {
                 result.put("code", -2);
-                result.put("message", "账号或密码错误!");
+                result.put("message", "用户名或密码错误!");
                 return result;
             } catch (AuthenticationException e) {
                 result.put("code", -3);

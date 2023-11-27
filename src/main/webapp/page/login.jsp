@@ -72,30 +72,16 @@
             }, success: function (data) {
                 console.log(data);
                 if (data.code === 200) {
-                    layer.alert(data.loginUser.username + "欢迎您!", {icon: 6}, function () {
+                    layer.msg("登录成功!", {icon: 6, time: 1000}, function () {
                         location.href = "/sys/goIndex";
-                    })
-                } else if (data.code === -1) {
-                    layer.alert(data.message, {icon: 5}, function () {
-                        location.reload();
-                    })
-                } else if (data.code === -2) {
-                    layer.alert(data.message, {icon: 5}, function () {
-                        location.reload();
-                    })
-                } else if (data.code === -3) {
-                    layer.alert(data.message, {icon: 5}, function () {
-                        location.reload();
-                    })
-                } else {
-                    layer.alert("未知错误!", {icon: 5}, function () {
-                        location.reload();
-                    })
+                    });
+                } else if (data.code === -1 || data.code === -2 || data.code === -3) {
+                    layer.msg(data.message, {icon: 5});
                 }
             }, error: function () {
-                layer.alert("访问登录后台失败!", {icon: 5}, function () {
+                layer.msg("访问登录接口失败!", {icon: 5}, function () {
                     location.reload();
-                })
+                });
             }
         })
     }
