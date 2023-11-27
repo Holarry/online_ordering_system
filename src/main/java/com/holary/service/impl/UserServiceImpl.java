@@ -7,6 +7,7 @@ import com.holary.mapper.UserMapper;
 import com.holary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -129,11 +130,16 @@ public class UserServiceImpl implements UserService {
      * @param id: 用户id
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
+    @Transactional
     @Override
     public Map<String, Object> delete(Integer id) {
         HashMap<String, Object> map = new HashMap<>();
+        // 删除用户
         int i = userMapper.deleteById(id);
-        if (i > 0) {
+        // 删除用户权限关系记录
+        Integer userRoleId = userMapper.selectUserRoleId(id);
+        int j = userMapper.deleteByUserRoleId(userRoleId);
+        if (i > 0 && j > 0) {
             map.put("code", 200);
             map.put("message", "删除用户成功!");
         } else {

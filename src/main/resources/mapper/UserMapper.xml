@@ -7,8 +7,9 @@
     <select id="selectAll" resultType="user">
         select * from user
         <where>
+            username != 'admin'
             <if test="username != null and username != ''">
-                username like concat('%', #{username}, '%')
+                and username like concat('%', #{username}, '%')
             </if>
             <if test="gender != null and gender != ''">
                 and gender = #{gender}
@@ -17,6 +18,7 @@
                 and status = #{status}
             </if>
         </where>
+        order by create_time
     </select>
 
     <!--根据用户名查询用户-->
@@ -81,6 +83,20 @@
     <delete id="deleteById">
         delete
         from user
+        where id = #{id}
+    </delete>
+
+    <!--根据userId查询用户权限关系表中对应的主键id-->
+    <select id="selectUserRoleId" resultType="java.lang.Integer">
+        select id
+        from user_role
+        where user_id = #{userId}
+    </select>
+
+    <!--根据id删除用户权限关系表中的记录-->
+    <delete id="deleteByUserRoleId">
+        delete
+        from user_role
         where id = #{id}
     </delete>
 </mapper>

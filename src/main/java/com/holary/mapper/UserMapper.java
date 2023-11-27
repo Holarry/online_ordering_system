@@ -69,4 +69,20 @@ public interface UserMapper {
      * @return: void
      */
     void insertRole(@Param("userId") Integer userId, @Param("roleId") int roleId);
+
+    /**
+     * description: 根据userId查询用户权限关系表中对应的主键id
+     *
+     * @param userId: 用户id
+     * @return: java.lang.Integer
+     */
+    Integer selectUserRoleId(@Param("userId") Integer userId);
+
+    /**
+     * description: 根据id删除用户权限关系表中的记录
+     *
+     * @param id: 主键id
+     * @return: int
+     */
+    int deleteByUserRoleId(int id);
 }
