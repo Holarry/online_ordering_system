@@ -124,20 +124,14 @@
             success: function (data) {
                 console.log(data);
                 if (data.code === 200) {
-                    layer.alert(data.message, {icon: 6}, function () {
+                    layer.msg(data.message, {icon: 6, time: 1000}, function () {
                         closeDialog();
                     });
-                } else if (data.code === -1) {
-                    layer.alert(data.message, {icon: 5});
-                } else if (data.code === -2) {
-                    layer.alert(data.message, {icon: 5});
-                } else if (data.code === -3) {
-                    layer.alert(data.message, {icon: 5});
-                } else if (data.code === -4) {
-                    layer.alert(data.message, {icon: 5});
+                } else if (data.code === -1 || data.code === -2 || data.code === -3 || data.code === -4) {
+                    layer.msg(data.message, {icon: 5});
                 }
             }, error() {
-                layer.alert("访问修改用户接口失败!", {icon: 5}, function () {
+                layer.msg("访问修改用户接口失败!", {icon: 5}, function () {
                     location.reload();
                 })
             }

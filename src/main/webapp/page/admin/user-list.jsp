@@ -159,7 +159,7 @@
             async: false,
             data: {
                 pageNum: number,
-                pageSize: 10,
+                pageSize: 8,
                 username: $("#username").val(),
                 gender: $("#gender").val(),
                 status: status
@@ -173,7 +173,7 @@
                     currentPage = data.paging.pageNum;// 当前页
                     //把数据写在页面上
                     let str = ''; // 用str变量拼接字符串
-                    count = (number - 1) * 10 + 1;
+                    count = (number - 1) * 8 + 1;
                     for (let i = 0; i < userList.length; i++) {
                         let status;
                         if (userList[i].status === 1) {
@@ -251,9 +251,9 @@
                 id: userId
             }, success: function () {
                 // 处理编辑操作
-                x_admin_show('编辑用户', '/admin/user/getDetailInfo?id=' + userId, 500, 450);
+                x_admin_show('编辑用户', '/admin/user/getDetailInfo?id=' + userId, 500, 455);
             }, error: function () {
-                alert("获取用户信息失败!");
+                layer.msg("获取用户信息失败!");
             }
         });
     }
@@ -272,15 +272,15 @@
                     id: userId
                 }, success: function (data) {
                     if (data.code === 200) {
-                        layer.alert(data.message, {icon: 6}, function () {
+                        layer.msg(data.message, {icon: 6, time: 1000}, function () {
                             x_admin_close();
                             location.reload();
                         });
                     } else if (data.code === -1) {
-                        layer.alert(data.message, {icon: 5});
+                        layer.msg(data.message, {icon: 5});
                     }
                 }, error() {
-                    layer.alert("访问删除用户接口失败!", {icon: 5}, function () {
+                    layer.msg("访问删除用户接口失败!", {icon: 5}, function () {
                         location.reload();
                     });
                 }
