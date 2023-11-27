@@ -73,21 +73,14 @@
             success: function (data) {
                 console.log(data);
                 if (data.code === 200) {
-                    layer.alert(data.message, {icon: 6}, function () {
+                    layer.msg(data.message, {icon: 6, time: 1000}, function () {
                         closeDialog();
                     });
-                } else if (data.code === -1) {
-                    layer.alert(data.message, {icon: 5});
-                } else if (data.code === -2) {
-                    layer.alert(data.message, {icon: 5});
-                } else if (data.code === -3) {
-                    layer.alert(data.message, {icon: 5});
-                } else {
-                    layer.alert("未知错误", {icon: 5})
+                } else if (data.code === -1 || data.code === -2 || data.code === -3) {
+                    layer.msg(data.message, {icon: 5});
                 }
-            }, error: function (err) {
-                console.log(err);
-                layer.alert("访问修改分类接口失败!", {icon: 5}, function () {
+            }, error: function () {
+                layer.msg("访问修改分类接口失败!", {icon: 5}, function () {
                     location.reload();
                 });
             }

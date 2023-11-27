@@ -27,7 +27,7 @@
         <span>分类管理</span>
         <%--添加分类--%>
         <button class="layui-btn layui-btn-normal"
-                onclick="x_admin_show('添加分类','../sys/goCategoryAdd',500,275)">
+                onclick="x_admin_show('添加分类','../sys/goCategoryAdd',500,281)">
             <i class="layui-icon layui-icon-add-1"></i>添加
         </button>
     </div>
@@ -93,9 +93,9 @@
                 id: categoryId
             }, success: function () {
                 // 处理编辑操作
-                x_admin_show('编辑分类', '/admin/category/getDetailInfo?id=' + categoryId, 500, 275);
+                x_admin_show('编辑分类', '/admin/category/getDetailInfo?id=' + categoryId, 500, 281);
             }, error: function () {
-                alert("获取分类信息失败!");
+                layui.msg("获取分类信息失败!");
             }
         });
     }
@@ -114,15 +114,15 @@
                     id: categoryId
                 }, success: function (data) {
                     if (data.code === 200) {
-                        layer.alert(data.message, {icon: 6}, function () {
+                        layer.msg(data.message, {icon: 6, time: 1000}, function () {
                             x_admin_close();
                             location.reload();
                         });
                     } else if (data.code === -1) {
-                        layer.alert(data.message, {icon: 5});
+                        layer.msg(data.message, {icon: 5});
                     }
                 }, error() {
-                    layer.alert("访问删除分类接口失败!", {icon: 5}, function () {
+                    layer.msg("访问删除分类接口失败!", {icon: 5}, function () {
                         location.reload();
                     });
                 }
