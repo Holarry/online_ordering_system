@@ -81,4 +81,66 @@ public class DishServiceImpl implements DishService {
         }
         return map;
     }
+
+    /**
+     * description: 根据菜品id查询菜品
+     *
+     * @param id: 菜品id
+     * @return: com.holary.entity.Dish
+     */
+    @Override
+    public Dish getDetailInfo(Integer id) {
+        return dishMapper.selectById(id);
+    }
+
+    /**
+     * description: 根据菜品id修改菜品
+     *
+     * @param dish: dish对象
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> update(Dish dish) {
+        HashMap<String, Object> map = new HashMap<>();
+        Dish dish1 = dishMapper.selectByIdAndName(dish.getId(), dish.getName());
+        if (dish.getName().isEmpty()) {
+            map.put("code", -1);
+            map.put("message", "菜品名称为空!");
+        } else if (dish.getCategoryId() == null) {
+            map.put("code", -2);
+            map.put("message", "菜品分类为空!");
+        } else if (dish.getPrice() == null) {
+            map.put("code", -3);
+            map.put("message", "菜品价格为空!");
+        } else if (dish1 != null) {
+            map.put("code", -4);
+            map.put("message", dish.getName() + "菜品已存在!");
+        } else {
+            dish.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+            dishMapper.updateById(dish);
+            map.put("code", 200);
+            map.put("message", "修改菜品成功!");
+        }
+        return map;
+    }
+
+    /**
+     * description: 根据菜品id删除菜品
+     *
+     * @param id: 菜品id
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> delete(Integer id) {
+        HashMap<String, Object> map = new HashMap<>();
+        int i = dishMapper.deleteById(id);
+        if (i > 0) {
+            map.put("code", 200);
+            map.put("message", "删除菜品成功!");
+        } else {
+            map.put("code", -1);
+            map.put("message", "删除菜品失败!");
+        }
+        return map;
+    }
 }

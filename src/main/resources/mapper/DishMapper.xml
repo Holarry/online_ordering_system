@@ -39,4 +39,55 @@
         insert into dish(name, category_id, price, image, description, create_time, update_time)
         VALUES (#{name}, #{categoryId}, #{price}, #{image}, #{Description}, #{createTime}, #{updateTime})
     </insert>
+
+    <!--根据菜品id查询菜品-->
+    <select id="selectById" resultType="dish">
+        select *
+        from dish
+        where id = #{id}
+    </select>
+
+    <!--根据菜品id和菜品名称查询菜品-->
+    <select id="selectByIdAndName" resultType="dish">
+        select *
+        from dish
+        where name = #{name}
+          and id != #{id}
+    </select>
+
+    <!--根据菜品id修改菜品-->
+    <update id="updateById">
+        update dish
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="image != null and name != ''">
+                image = #{image},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--根据菜品id删除菜品-->
+    <delete id="deleteById">
+        delete
+        from dish
+        where id = #{id}
+    </delete>
 </mapper>

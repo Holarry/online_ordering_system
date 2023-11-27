@@ -78,7 +78,7 @@ public class SystemController {
      */
     @RequestMapping("/goDishList")
     public String goDishList() {
-        return "/admin/dish-list";
+        return "admin/dish-list";
     }
 
     /**
@@ -88,6 +88,6 @@ public class SystemController {
      */
     @RequestMapping("/goDishAdd")
     public String goDishAdd() {
-        return "/admin/dish-add";
+        return "admin/dish-add";
     }
 }

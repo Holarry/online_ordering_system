@@ -37,4 +37,36 @@ public interface DishMapper {
      * @return: void
      */
     void insert(Dish dish);
+
+    /**
+     * description: 根据菜品id查询菜品
+     *
+     * @param id: 菜品id
+     * @return: com.holary.entity.Dish
+     */
+    Dish selectById(Integer id);
+
+    /**
+     * description: 根据菜品id和菜品名称查询菜品
+     *
+     * @param id:   菜品id
+     * @param name: 菜品名称
+     * @return: com.holary.entity.Dish
+     */
+    Dish selectByIdAndName(@Param("id") Integer id, @Param("name") String name);
+
+    /**
+     * description: 根据菜品id修改菜品
+     *
+     * @param dish: dish对象
+     * @return: void
+     */
+    void updateById(Dish dish);
+
+    /**
+     * 根据菜品id删除菜品
+     *
+     * @return: int
+     */
+    int deleteById(Integer id);
 }

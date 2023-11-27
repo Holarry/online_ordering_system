@@ -195,8 +195,8 @@
                             '<td>' + dishList[i].createTime + '</td>' +
                             '<td>' + dishList[i].updateTime + '</td>' +
                             '<td class="td-manage">' +
-                            '<button type="button" class="layui-btn layui-btn-sm layui-btn-warm" onclick="editUser(' + dishList[i].id + ')"><i class="layui-icon layui-icon-edit"></i></button>' +
-                            '<button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="deleteUser(' + dishList[i].id + ')"><i class="layui-icon layui-icon-delete"></i></button>' +
+                            '<button type="button" class="layui-btn layui-btn-sm layui-btn-warm" onclick="editDish(' + dishList[i].id + ')"><i class="layui-icon layui-icon-edit"></i></button>' +
+                            '<button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="deleteDish(' + dishList[i].id + ')"><i class="layui-icon layui-icon-delete"></i></button>' +
                             '</td>' +
                             '</tr>';
                     }
@@ -271,6 +271,7 @@
         });
     }
 
+    // 添加菜品
     function addDish() {
         layer.open({
             type: 1,
@@ -282,6 +283,61 @@
             shadeClose: true,
             content: '<iframe src="../sys/goDishAdd" style="width: 100%; height: 100%;" frameborder="0"></iframe>'
         })
+    }
+
+    // 修改菜品
+    function editDish(dishId) {
+        $.ajax({
+            url: "/admin/dish/getDetailInfo",
+            type: "GET",
+            data: {
+                id: dishId
+            }, success: function (data) {
+                console.log(data);
+                layer.open({
+                    type: 2,
+                    title: '添加菜品',
+                    offset: 'r',
+                    anim: 'slideLeft', // 从右往左
+                    area: ['550px', '100%'],
+                    shade: 0.1,
+                    shadeClose: true,
+                    content: '/admin/dish/getDetailInfo?id=' + dishId
+                });
+            }
+        });
+    }
+
+    // 删除菜品
+    function deleteDish(dishId) {
+        layer.confirm('您确认删除该菜品吗?', {
+            icon: 3,
+            title: '警告',
+            btn: ['确认', '取消'],
+        }, function () {
+            $.ajax({
+                url: "/admin/dish/delete",
+                type: "POST",
+                data: {
+                    id: dishId
+                }, success: function (data) {
+                    console.log(data);
+                    if (data.code === 200) {
+                        layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                            x_admin_close();
+                            location.reload();
+                        });
+                    } else if (data.code === -1) {
+                        layer.msg(data.message, {icon: 5});
+                    }
+                }, error(err) {
+                    console.log(err);
+                    layer.msg("访问删除菜品接口失败!", {icon: 5}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
     }
 
     // addDishSuccessCallback 函数

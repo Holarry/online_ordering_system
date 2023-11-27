@@ -29,4 +29,28 @@ public interface DishService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> save(Dish dish);
+
+    /**
+     * description: 根据菜品id查询菜品
+     *
+     * @param id: 菜品id
+     * @return: com.holary.entity.Dish
+     */
+    Dish getDetailInfo(Integer id);
+
+    /**
+     * description: 根据菜品id修改菜品
+     *
+     * @param dish: dish对象
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> update(Dish dish);
+
+    /**
+     * description: 根据菜品id删除菜品
+     *
+     * @param id: 菜品id
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> delete(Integer id);
 }
