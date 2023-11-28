@@ -181,15 +181,12 @@
                             status = '下架';
                         }
 
-                        // 判断图片路径是否存在
-                        let imageSrc = dishList[i].image ? dishList[i].image : '../../static/images/login.jpg';
-
                         str += '<tr>' +
                             '<td>' + (count++) + '</td>' +
                             '<td>' + dishList[i].name + '</td>' +
                             '<td>' + dishList[i].categoryName + '</td>' +
                             '<td>' + dishList[i].price + '元' + '</td>' +
-                            '<td><img src="' + imageSrc + '" style="width: 100%" alt="图片未找到"/></td>' +
+                            '<td><img src="' + dishList[i].image + '" style="width: 100%" alt="图片未找到"/></td>' +
                             '<td>' + dishList[i].description + '</td>' +
                             '<td>' + status + '</td>' +
                             '<td>' + dishList[i].createTime + '</td>' +
@@ -274,15 +271,15 @@
     // 添加菜品
     function addDish() {
         layer.open({
-            type: 1,
+            type: 2,
             title: '添加菜品',
             offset: 'r',
             anim: 'slideLeft', // 从右往左
             area: ['550px', '100%'],
             shade: 0.1,
             shadeClose: true,
-            content: '<iframe src="../sys/goDishAdd" style="width: 100%; height: 100%;" frameborder="0"></iframe>'
-        })
+            content: '/sys/goDishAdd'
+        });
     }
 
     // 修改菜品
@@ -296,7 +293,7 @@
                 console.log(data);
                 layer.open({
                     type: 2,
-                    title: '添加菜品',
+                    title: '编辑菜品',
                     offset: 'r',
                     anim: 'slideLeft', // 从右往左
                     area: ['550px', '100%'],

@@ -149,6 +149,9 @@
         let price = $('#price').val();
         let image = $('#upload-dish-image-preview img').attr('src');
         let description = $('#description').val();
+        if (image === '') {
+            image = 'https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/dish-default.jpg'
+        }
         if (description === '') {
             description = '暂无菜品描述';
         }
