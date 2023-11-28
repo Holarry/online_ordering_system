@@ -3,6 +3,7 @@ package com.holary.service.impl;
 import com.holary.entity.User;
 import com.holary.mapper.UserMapper;
 import com.holary.service.LoginService;
+import com.holary.util.BaseContext;
 import com.holary.util.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -66,7 +67,8 @@ public class LoginServiceImpl implements LoginService {
             }
         }
         //从shiro提供的session对象中获取已经认证的用户
-        Object user = subject.getSession().getAttribute("user");
+        User user = (User) subject.getSession().getAttribute("user");
+        BaseContext.setCurrentId(user.getId()); // 将当前登录用户的id存入ThreadLocal
         result.put("code", 200);
         result.put("message", username + "认证成功!");
         result.put("loginUser", user);
