@@ -163,9 +163,9 @@
                 categoryId: $("#categoryName").val(),
                 status: status
             }, success: function (data) {
-                // 取出返回数据中用户数据
+                // 取出返回数据中菜品数据
                 let dishList = data.paging.list;
-                // 判断userList是否有数据
+                // 判断dishList是否有数据
                 if (dishList.length > 0) {
                     totalPages = data.paging.pages;  // 总页数
                     totalCounts = data.paging.total; // 总条数
@@ -205,7 +205,7 @@
                     $("#tab").html('<tr><td colspan="10" align="center">没有菜品数据</td></tr>');
                 }
             }, error: function () {
-                alert("访问菜品接口失败!");
+                layer.msg("访问菜品接口失败!");
             }
         })
     }
@@ -263,7 +263,7 @@
                 layui.form.render('select');
             }, error: function (err) {
                 console.log(err);
-                alert("访问分类接口失败!");
+                layer.msg("访问分类接口失败!");
             }
         });
     }
