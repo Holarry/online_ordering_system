@@ -43,6 +43,9 @@ public class TencentCosUtil {
 
         cosClient.putObject(putObjectRequest);
 
+        // 释放资源
+        cosClient.shutdown();
+
         return "https://" + TencentCosConfig.BUCKETNAME + "." + "cos" + "." + TencentCosConfig.REGION + ".myqcloud.com/" + key;
     }
 }
