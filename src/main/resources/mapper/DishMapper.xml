@@ -27,8 +27,28 @@
         </where>
     </select>
 
+    <!-- 根据菜品名称和菜品分类查询菜品 -->
+    <select id="selectAll1" resultType="com.holary.dto.DishDto">
+        select d.*,
+        c.name categoryName
+        from dish d
+        inner join
+        category c
+        on
+        d.category_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                d.name like concat('%', #{name}, '%')
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            and status = 1
+        </where>
+    </select>
+
     <!--根据菜品名称查询菜品-->
-    <select id="selectByName" resultType="dish">
+    <select id="selectByName" resultType="com.holary.entity.Dish">
         select *
         from dish
         where name = #{name}
@@ -41,14 +61,14 @@
     </insert>
 
     <!--根据菜品id查询菜品-->
-    <select id="selectById" resultType="dish">
+    <select id="selectById" resultType="com.holary.entity.Dish">
         select *
         from dish
         where id = #{id}
     </select>
 
     <!--根据菜品id和菜品名称查询菜品-->
-    <select id="selectByIdAndName" resultType="dish">
+    <select id="selectByIdAndName" resultType="com.holary.entity.Dish">
         select *
         from dish
         where name = #{name}

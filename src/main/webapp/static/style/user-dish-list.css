@@ -1,0 +1,57 @@
+#menu-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu-item {
+    border: 1px solid #ccc;
+    margin: 12px;
+    padding: 10px;
+    display: flex; /* 设置弹性布局，让图片和属性并排 */
+    width: calc(33.33% - 24px); /* 初始宽度为1/3，减去外边距 */
+    box-sizing: border-box; /* 让外边距和边框计算在内部 */
+}
+
+.menu-item:nth-child(3n+1) {
+    margin-left: 0; /* 设置每行第一个元素的左外边距为0 */
+}
+
+.menu-item:nth-child(3n+3) {
+    margin-right: 0; /* 设置每行第三个元素的右外边距为0 */
+}
+
+/* 媒体查询：当页面宽度小于等于768px时，每行展示1个菜品 */
+@media screen and (max-width: 768px) {
+    .menu-item {
+        width: calc(100% - 24px); /* 在小屏幕上宽度为100%，减去外边距 */
+        margin-right: 0; /* 在小屏幕上不需要右外边距 */
+    }
+}
+
+.menu-item img {
+    width: 150px;
+    height: 130px;
+    object-fit: cover;
+    margin-right: 15px; /* 添加右边距，以分隔图片和属性 */
+}
+
+.menu-item-details {
+    display: flex;
+    flex-direction: column; /* 将属性设置为垂直排列 */
+}
+
+.menu-item p {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.menu-item button {
+    background-color: #ffc200;
+    border-color: #ffc200;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}

@@ -64,7 +64,7 @@
                         </a>
                     </li>
                     <li class="layui-nav-item-d layui-nav-item">
-                        <a href="javascript:" target="right">
+                        <a href="../sys/goOrderList" target="right">
                             <i class="layui-icon layui-icon-notice"></i>
                             <span>订单管理</span>
                         </a>
@@ -73,7 +73,7 @@
 
                 <shiro:hasRole name="普通用户">
                     <li class="layui-nav-item-d layui-nav-item">
-                        <a href="javascript:" target="right" style="margin-top: 120px">
+                        <a href="../sys/goUserDishList" target="right" style="margin-top: 120px">
                             <i class="layui-icon layui-icon-form"></i>
                             <span>菜单列表</span>
                         </a>
@@ -107,7 +107,7 @@
             <iframe src="../sys/goUserList" name="right"></iframe>
         </shiro:hasRole>
         <shiro:hasRole name="普通用户">
-            <iframe src="" name="right"></iframe>
+            <iframe src="../sys/goUserDishList" name="right"></iframe>
         </shiro:hasRole>
     </div>
 

@@ -38,6 +38,6 @@ public class DishDto {
     private Date updateTime;
     //是否删除
     private Integer isDelete;
-    // 菜品名称
+    // 分类名称
     private String categoryName;
 }

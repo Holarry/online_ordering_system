@@ -90,4 +90,24 @@ public class SystemController {
     public String goDishAdd() {
         return "admin/dish-add";
     }
+
+    /**
+     * description: 跳转订单列表
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goOrderList")
+    public String goOrderList() {
+        return "admin/order-list";
+    }
+
+    /**
+     * description: 跳转订单列表
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goUserDishList")
+    public String goUserDishList() {
+        return "user/dish-list";
+    }
 }

@@ -17,7 +17,7 @@ import java.util.Map;
  * @Description: DishController
  */
 @RequestMapping("/admin/dish")
-@Controller
+@Controller("adminDishController")
 public class DishController {
     @Autowired
     private DishService dishService;

@@ -69,4 +69,13 @@ public interface DishMapper {
      * @return: int
      */
     int deleteById(Integer id);
+
+    /**
+     * description: 根据菜品名称和菜品分类查询菜品
+     *
+     * @param name:       菜品名称
+     * @param categoryId: 菜品分类
+     * @return: java.util.List<com.holary.dto.DishDto>
+     */
+    List<DishDto> selectAll1(@Param("name") String name, @Param("categoryId") Integer categoryId);
 }

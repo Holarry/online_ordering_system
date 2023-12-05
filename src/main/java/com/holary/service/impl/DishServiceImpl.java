@@ -143,4 +143,20 @@ public class DishServiceImpl implements DishService {
         }
         return map;
     }
+
+    /**
+     * description: 用户端菜品分页查询和条件查询
+     *
+     * @param name:       菜品名称
+     * @param categoryId: 菜品分类
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> list1(String name, Integer categoryId) {
+        HashMap<String, Object> map = new HashMap<>();
+        List<DishDto> dishList = dishMapper.selectAll1(name, categoryId);
+        map.put("code", 200);
+        map.put("dishList", dishList);
+        return map;
+    }
 }

@@ -53,4 +53,13 @@ public interface DishService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> delete(Integer id);
+
+    /**
+     * description: 用户端菜品分页查询和条件查询
+     *
+     * @param name:       菜品名称
+     * @param categoryId: 菜品分类
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> list1(String name, Integer categoryId);
 }
