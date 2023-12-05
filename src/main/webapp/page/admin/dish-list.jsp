@@ -58,7 +58,7 @@
                     </select>
                 </label>
                 <button class="layui-btn layui-btn-normal" type="button" style="margin-bottom: 5px;margin-left: 25px"
-                        onclick="selectUserByCondition()">
+                        onclick="selectDishByCondition()">
                     <i class="layui-icon layui-icon-search"></i>
                 </button>
                 <button class="layui-btn layui-btn-primary layui-border-blue" type="button"
@@ -102,12 +102,12 @@
         $(this).keydown(function (e) {
             if (e.which === 13) {
                 if ($("#name").val() !== '' || $("#categoryName").val() !== '' || $("#status").val() !== '') {
-                    selectUserByCondition();
+                    selectDishByCondition();
                     return false;
                 }
             }
-        })
-    })
+        });
+    });
     // 总页数
     let totalPages = 0;
     // 总条数
@@ -211,7 +211,7 @@
     }
 
     // 条件查询
-    function selectUserByCondition() {
+    function selectDishByCondition() {
         // 初始化
         selectAll(1);
         // 加载数据
@@ -229,18 +229,18 @@
                 // 当页面一改变就执行
                 selectAll(number);
             }
-        })
+        });
     }
 
     // 重置
     function clearSelected() {
         // 清空输入框
         $("#name").val('');
-        // 清空性别和状态选择框
+        // 清空分类和状态选择框
         $("#categoryName").val("");
         $("#status").val("");
         $("form")[0].reset();
-        selectUserByCondition();
+        selectDishByCondition();
     }
 
     // 获取分类

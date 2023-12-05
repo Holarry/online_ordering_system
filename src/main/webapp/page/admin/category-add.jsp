@@ -53,7 +53,7 @@
         let name = $('#name').val();
         let sort = $('#sort').val();
 
-        // 构造Category对象
+        // 构造category对象
         let category = {
             name: name,
             sort: parseInt(sort)

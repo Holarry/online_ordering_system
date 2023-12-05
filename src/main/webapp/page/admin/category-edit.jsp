@@ -57,7 +57,7 @@
         let name = $('#name').val();
         let sort = $('#sort').val();
 
-        // 构造分类对象
+        // 构造category对象
         let category = {
             id: id,
             name: name,

@@ -107,7 +107,7 @@
             status = 0;
         }
 
-        // 构造用户对象
+        // 构造user对象
         let user = {
             id: id,
             username: username,
