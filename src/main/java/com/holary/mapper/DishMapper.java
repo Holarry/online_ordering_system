@@ -64,6 +64,14 @@ public interface DishMapper {
     void updateById(Dish dish);
 
     /**
+     * description: 根据分类id查询菜品
+     *
+     * @param categoryId: 分类id
+     * @return: java.util.List<Dish>
+     */
+    List<Dish> selectByCategoryId(Integer categoryId);
+
+    /**
      * 根据菜品id删除菜品
      *
      * @return: int

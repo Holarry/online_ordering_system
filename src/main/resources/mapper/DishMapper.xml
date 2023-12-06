@@ -104,6 +104,13 @@
         where id = #{id}
     </update>
 
+    <!--根据分类id查询菜品-->
+    <select id="selectByCategoryId" resultType="com.holary.entity.Dish">
+        select *
+        from dish
+        where category_id = #{categoryId}
+    </select>
+
     <!--根据菜品id删除菜品-->
     <delete id="deleteById">
         delete

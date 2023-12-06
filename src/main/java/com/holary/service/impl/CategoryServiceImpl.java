@@ -1,7 +1,9 @@
 package com.holary.service.impl;
 
 import com.holary.entity.Category;
+import com.holary.entity.Dish;
 import com.holary.mapper.CategoryMapper;
+import com.holary.mapper.DishMapper;
 import com.holary.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ import java.util.Map;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private DishMapper dishMapper;
 
     /**
      * description: 查询分类
@@ -117,13 +122,20 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Map<String, Object> delete(Integer id) {
         HashMap<String, Object> map = new HashMap<>();
-        int i = categoryMapper.deleteById(id);
-        if (i > 0) {
-            map.put("code", 200);
-            map.put("message", "删除分类成功!");
-        } else {
+        // 判断删除的分类下是否有关联菜品
+        List<Dish> dishList = dishMapper.selectByCategoryId(id);
+        if (!dishList.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "删除分类失败!");
+            map.put("message", "该分类下关联有菜品,不能删除!");
+        } else {
+            int i = categoryMapper.deleteById(id);
+            if (i > 0) {
+                map.put("code", 200);
+                map.put("message", "删除分类成功!");
+            } else {
+                map.put("code", -2);
+                map.put("message", "删除分类失败!");
+            }
         }
         return map;
     }
