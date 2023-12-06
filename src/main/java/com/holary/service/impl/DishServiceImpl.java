@@ -133,13 +133,21 @@ public class DishServiceImpl implements DishService {
     @Override
     public Map<String, Object> delete(Integer id) {
         HashMap<String, Object> map = new HashMap<>();
-        int i = dishMapper.deleteById(id);
-        if (i > 0) {
-            map.put("code", 200);
-            map.put("message", "删除菜品成功!");
-        } else {
+        // 判断删除的菜品是否处于上架状态
+        Dish dish = dishMapper.selectById(id);
+        Integer status = dish.getStatus();
+        if (status == 1) {
             map.put("code", -1);
-            map.put("message", "删除菜品失败!");
+            map.put("message", "该菜品处于上架状态,不能删除!");
+        } else {
+            int i = dishMapper.deleteById(id);
+            if (i > 0) {
+                map.put("code", 200);
+                map.put("message", "删除菜品成功!");
+            } else {
+                map.put("code", -2);
+                map.put("message", "删除菜品失败!");
+            }
         }
         return map;
     }

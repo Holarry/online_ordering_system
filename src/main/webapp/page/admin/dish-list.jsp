@@ -324,7 +324,7 @@
                             x_admin_close();
                             location.reload();
                         });
-                    } else if (data.code === -1) {
+                    } else if (data.code === -1 || data.code === -2) {
                         layer.msg(data.message, {icon: 5});
                     }
                 }, error(err) {
