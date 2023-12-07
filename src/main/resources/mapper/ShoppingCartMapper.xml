@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holary.mapper.ShoppingCartMapper">
+    <!--根据用户id和菜品id查询购物车-->
+    <select id="selectByUserIdAndDishId" resultType="com.holary.entity.ShoppingCart">
+        select *
+        from shopping_cart
+        where user_id = #{userId}
+          and dish_id = #{dishId}
+    </select>
+
+    <!--添加购物车-->
+    <insert id="insert">
+        insert into shopping_cart(user_id, dish_id, dish_name, dish_image, number, price, create_time)
+        VALUES (#{userId}, #{dishId}, #{dishName}, #{dishImage}, #{number}, #{price}, #{createTime})
+    </insert>
+
+    <!--根据id修改购物车菜品数量-->
+    <update id="updateNumberById">
+        update shopping_cart
+        set number = #{number}
+        where id = #{id}
+    </update>
+
+    <!--根据用户id查询购物车-->
+    <select id="selectByUserId" resultType="com.holary.entity.ShoppingCart">
+        select *
+        from shopping_cart
+        where user_id = #{userId}
+    </select>
+
+    <!--根据用户id和菜品id删除购物车中的菜品-->
+    <delete id="deleteByUserIdAndDishId">
+        delete
+        from shopping_cart
+        where user_id = #{userId}
+          and dish_id = #{dishId}
+    </delete>
+</mapper>

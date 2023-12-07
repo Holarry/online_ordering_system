@@ -29,8 +29,8 @@ public class ShoppingCart {
     private String dishImage;
     //数量
     private Integer number;
-    //金额
-    private Double amount;
+    //单价
+    private Double price;
     //创建时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

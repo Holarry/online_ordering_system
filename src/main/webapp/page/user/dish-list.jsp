@@ -61,6 +61,8 @@
         // 获取分类
         getCategoryList();
 
+        getShoppingCartList();
+
         // 查询菜品
         selectDishByCondition();
     });
@@ -83,8 +85,7 @@
                 }
                 // 刷新select渲染
                 layui.form.render('select');
-            }, error: function (err) {
-                console.log(err);
+            }, error: function () {
                 layer.msg("访问分类接口失败!");
             }
         });
@@ -97,7 +98,6 @@
         // 清空原有内容
         menuContainer.empty();
 
-        // 使用Ajax从后端获取菜品数据
         $.ajax({
             url: "/user/dish/list",
             method: "GET",
@@ -111,8 +111,7 @@
                 } else {
                     layer.msg("查询数据失败!", {icon: 5});
                 }
-            }, error: function (err) {
-                console.log(err);
+            }, error: function () {
                 layer.msg("访问菜品接口失败!", {icon: 5});
             }
         });
@@ -131,14 +130,45 @@
                 const price = $("<p>").text('菜品价格: ￥' + dish.price.toFixed(2));
                 const description = $("<p>").text('菜品描述: ' + dish.description);
 
-                const addToCartButton = $('<button type="button" onclick="addShoppingCart()">')
-                    .html('<i class="layui-icon layui-icon-cart-simple"></i>加入购物车');
+                const addToCartButton = $('<button type="button">')
+                    .html('<i class="layui-icon layui-icon-cart-simple"></i>加入购物车')
+                    .attr("data-dish-id", dish.id) // 添加唯一标识符
+                    .click(function () {
+                        addShoppingCart(dish.id, dish.name, dish.image, dish.price);
+                    });
 
-                detailsContainer.append(name, category, price, description, addToCartButton);
+                const cartControlsContainer = $('<div>').addClass('cart-controls');
+
+                detailsContainer.append(name, category, price, description, addToCartButton, cartControlsContainer);
                 dishContainer.append(image).append(detailsContainer);
                 menuContainer.append(dishContainer);
+
+                getShoppingCartList();
             });
         }
+    }
+
+    function getShoppingCartList() {
+        $.ajax({
+            url: "/user/shoppingCart/list",
+            method: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                if (data.code === 200) {
+                    // 遍历购物车中的菜品数量信息，展示相应的控制元素
+                    data.shoppingCartList.forEach(shoppingCart => {
+                        if (shoppingCart.number > 0) {
+                            updateCartControls(shoppingCart.dishId, shoppingCart.number);
+                        }
+                    });
+                } else {
+                    layer.msg("获取购物车信息失败!", {icon: 5});
+                }
+            },
+            error: function () {
+                layer.msg("访问购物车接口失败!", {icon: 5});
+            }
+        });
     }
 
     // 重置
@@ -152,8 +182,84 @@
     }
 
     // 加入购物车
-    function addShoppingCart() {
+    function addShoppingCart(dishId, dishName, dishImage, dishPrice) {
+        // 构造shoppingCart数据
+        const shoppingCart = {
+            dishId: dishId,
+            dishName: dishName,
+            dishImage: dishImage,
+            price: dishPrice
+        };
 
+        $.ajax({
+            url: "/user/shoppingCart/addShoppingCart",
+            method: "POST",
+            dataType: "JSON",
+            contentType: "application/json",
+            data: JSON.stringify(shoppingCart),
+            success: function (data) {
+                console.log(data)
+                if (data.code === 200) {
+                    layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                        updateCartControls(dishId, data.shoppingCart.number);
+                    });
+                } else {
+                    layer.msg(data.message, {icon: 5});
+                }
+            },
+            error: function () {
+                layer.msg("访问购物车接口失败!", {icon: 5});
+            }
+        });
+    }
+
+    // 更新加入购物车按钮右侧显示
+    function updateCartControls(dishId, number) {
+        // 找到对应的容器
+        const controlsContainer = $(`button[data-dish-id="${dishId}"]`).siblings('.cart-controls');
+
+        // 在容器中添加加号、数量、减号的元素
+        const plusIcon = $('<i class="layui-icon layui-icon-addition"></i>').click(function () {
+            // 处理加号点击事件
+            updateDishNumber(dishId, 1);
+        });
+        const itemCount = $('<span>').text(number).addClass('item-count');
+        const minusIcon = $('<i class="layui-icon layui-icon-subtraction"></i>').click(function () {
+            // 处理减号点击事件
+            if (number >= 1) {
+                updateDishNumber(dishId, -1);
+            }
+        });
+
+        // 清空原有内容，添加新的内容
+        controlsContainer.empty().append(plusIcon, itemCount, minusIcon);
+    }
+
+    // 更新购物车中菜品数量
+    function updateDishNumber(dishId, quantity) {
+        $.ajax({
+            url: "/user/shoppingCart/updateNumber",
+            method: "POST",
+            dataType: "JSON",
+            data: {
+                dishId: dishId,
+                quantity: quantity
+            }, success: function (data) {
+                if (data.code === 200) {
+                    // 更新成功后，重新获取购物车信息并更新显示
+                    if (data.shoppingCart.number > 0) {
+                        getShoppingCartList();
+                    } else {
+                        getShoppingCartList();
+                        location.reload();
+                    }
+                } else {
+                    layer.msg(data.message, {icon: 5});
+                }
+            }, error: function () {
+                layer.msg("访问更新购物车接口失败!", {icon: 5});
+            }
+        });
     }
 </script>
 </html>

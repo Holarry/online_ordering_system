@@ -55,3 +55,41 @@
     padding: 5px 10px;
     cursor: pointer;
 }
+
+.menu-item div .cart-controls i {
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 10px;
+    position: relative;
+}
+
+.menu-item div .cart-controls i::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: #007BFF; /* 蓝色 */
+    border-radius: 50%; /* 圆形 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: -10px; /* 调整圆圈位置 */
+    top: -1px;
+}
+
+.menu-item div .cart-controls .layui-icon-addition::before {
+    content: '+';
+    color: white;
+}
+
+.menu-item div .cart-controls .layui-icon-subtraction::before {
+    content: '-';
+    color: white;
+}
+
+.menu-item div .cart-controls .item-count {
+    font-size: 16px;
+    line-height: 28px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
