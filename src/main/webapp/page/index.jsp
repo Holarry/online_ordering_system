@@ -79,7 +79,7 @@
                         </a>
                     </li>
                     <li class="layui-nav-item-d layui-nav-item">
-                        <a href="javascript:" target="right">
+                        <a href="../sys/goShoppingCartList" target="right">
                             <i class="layui-icon layui-icon-cart"></i>
                             <span>购物车</span>
                         </a>

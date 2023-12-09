@@ -42,3 +42,7 @@ hr {
     text-align: center;
     width: auto;
 }
+
+table tr th {
+    text-align: center !important;
+}

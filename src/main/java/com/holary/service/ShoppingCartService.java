@@ -33,4 +33,26 @@ public interface ShoppingCartService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> updateNumber(Integer dishId, Integer quantity);
+
+    /**
+     * description: 计算购物车中菜品的总金额
+     *
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> calculateTotalAmount();
+
+    /**
+     * description: 根据用户id和菜品id删除购物车中的菜品
+     *
+     * @param dishId: 菜品id
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> deleteShoppingCartDish(Integer dishId);
+
+    /**
+     * description: 清空购物车
+     *
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> clearShoppingCart();
 }

@@ -38,4 +38,11 @@
         where user_id = #{userId}
           and dish_id = #{dishId}
     </delete>
+
+    <!--根据用户id清空购物车-->
+    <delete id="deleteByUserId">
+        delete
+        from shopping_cart
+        where user_id = #{userId}
+    </delete>
 </mapper>

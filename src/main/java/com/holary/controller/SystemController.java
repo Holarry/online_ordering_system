@@ -102,12 +102,32 @@ public class SystemController {
     }
 
     /**
-     * description: 跳转订单列表
+     * description: 跳转菜单列表
      *
      * @return: java.lang.String
      */
     @RequestMapping("/goUserDishList")
     public String goUserDishList() {
         return "user/dish-list";
+    }
+
+    /**
+     * description: 跳转购物车列表
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goShoppingCartList")
+    public String goShoppingCartList() {
+        return "user/shoppingCart-list";
+    }
+
+    /**
+     * description: 跳转提交订单页面
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goSubmitOrder")
+    public String goSubmitOrder() {
+        return "user/submit-order";
     }
 }

@@ -8,6 +8,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -107,6 +108,67 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             map.put("shoppingCart", shoppingCart);
             map.put("message", "修改菜品数量成功!");
         }
+        return map;
+    }
+
+    /**
+     * description: 计算购物车中菜品的总金额
+     *
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> calculateTotalAmount() {
+        HashMap<String, Object> map = new HashMap<>();
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        List<ShoppingCart> shoppingCartList = shoppingCartMapper.selectByUserId(userId);
+
+        // 使用BigDecimal计算金额,保证精度不丢失
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (ShoppingCart shoppingCart : shoppingCartList) {
+            int number = shoppingCart.getNumber();
+            BigDecimal price = BigDecimal.valueOf(shoppingCart.getPrice());
+            BigDecimal subtotal = price.multiply(BigDecimal.valueOf(number));
+            totalAmount = totalAmount.add(subtotal);
+        }
+        map.put("code", 200);
+        map.put("totalAmount", totalAmount);
+        return map;
+    }
+
+    /**
+     * description: 根据用户id和菜品id删除购物车中的菜品
+     *
+     * @param dishId: 菜品id
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> deleteShoppingCartDish(Integer dishId) {
+        HashMap<String, Object> map = new HashMap<>();
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        shoppingCartMapper.deleteByUserIdAndDishId(userId, dishId);
+        map.put("code", 200);
+        map.put("message", "删除菜品成功!");
+        return map;
+    }
+
+    /**
+     * description: 清空购物车
+     *
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> clearShoppingCart() {
+        HashMap<String, Object> map = new HashMap<>();
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        shoppingCartMapper.deleteByUserId(userId);
+        map.put("code", 200);
+        map.put("message", "清空购物车成功!");
         return map;
     }
 }

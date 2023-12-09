@@ -56,4 +56,38 @@ public class ShoppingCartController {
     public Map<String, Object> updateNumber(Integer dishId, Integer quantity) {
         return shoppingCartService.updateNumber(dishId, quantity);
     }
+
+    /**
+     * description: 计算购物车中菜品的总金额
+     *
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @RequestMapping("/calculateTotalAmount")
+    @ResponseBody
+    public Map<String, Object> calculateTotalAmount() {
+        return shoppingCartService.calculateTotalAmount();
+    }
+
+    /**
+     * description: 根据用户id和菜品id删除购物车中的菜品
+     *
+     * @param dishId: 菜品id
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @RequestMapping("/deleteShoppingCartDish")
+    @ResponseBody
+    public Map<String, Object> deleteShoppingCartDish(Integer dishId) {
+        return shoppingCartService.deleteShoppingCartDish(dishId);
+    }
+
+    /**
+     * description: 清空购物车
+     *
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @RequestMapping("/clearShoppingCart")
+    @ResponseBody
+    public Map<String, Object> clearShoppingCart() {
+        return shoppingCartService.clearShoppingCart();
+    }
 }

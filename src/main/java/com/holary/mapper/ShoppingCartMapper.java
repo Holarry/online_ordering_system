@@ -52,4 +52,12 @@ public interface ShoppingCartMapper {
      * @return: void
      */
     void deleteByUserIdAndDishId(@Param("userId") Integer userId, @Param("dishId") Integer dishId);
+
+    /**
+     * description: 根据用户id清空购物车
+     *
+     * @param userId: 用户id
+     * @return: void
+     */
+    void deleteByUserId(Integer userId);
 }
