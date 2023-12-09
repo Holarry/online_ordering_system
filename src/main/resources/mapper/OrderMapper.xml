@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holary.mapper.OrderMapper">
+    <!--提交订单-->
+    <insert id="insertOrder">
+        insert into `order`(order_number, user_id, consignee, consignee_phone, address, amount, remark, status,
+                            order_time)
+        VALUES (#{orderNumber}, #{userId}, #{consignee}, #{consigneePhone}, #{address}, #{amount}, #{remark}, #{status},
+                #{orderTime})
+    </insert>
+</mapper>

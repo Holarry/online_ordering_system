@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -23,13 +24,19 @@ public class Order {
     private String orderNumber;
     //用户id
     private Integer userId;
-    //地址id
-    private Integer addressId;
+    // 收货人
+    private String consignee;
+    // 收货人手机号
+    private String consigneePhone;
+    //地址
+    private String address;
+    //金额
+    private BigDecimal amount;
+    //备注
+    private String remark;
+    //状态
+    private Integer status;
     //订单时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date orderTime;
-    //金额
-    private Double amount;
-    //状态
-    private Integer status;
 }

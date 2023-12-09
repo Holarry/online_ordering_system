@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -24,7 +25,7 @@ public class Dish {
     //分类id
     private Integer categoryId;
     //菜品价格
-    private Double price;
+    private BigDecimal price;
     //菜品图片
     private String image;
     //菜品描述
