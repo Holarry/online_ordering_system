@@ -16,7 +16,7 @@ import java.util.Map;
  * @Description: OrderController
  */
 @RequestMapping("/user/order")
-@Controller
+@Controller("userOrderController")
 public class OrderController {
     @Autowired
     private OrderService orderService;

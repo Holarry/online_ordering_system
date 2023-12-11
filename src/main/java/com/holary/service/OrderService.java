@@ -17,4 +17,16 @@ public interface OrderService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> submitOrder(Order order);
+
+    /**
+     * description: 订单分页查询和条件查询
+     *
+     * @param pageNum:     页码
+     * @param pageSize:    条数
+     * @param orderNumber: 订单号
+     * @param consignee:   收货人
+     * @param status:      状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> list(int pageNum, int pageSize, String orderNumber, String consignee, Integer status);
 }

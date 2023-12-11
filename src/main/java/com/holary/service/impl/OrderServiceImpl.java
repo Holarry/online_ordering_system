@@ -1,5 +1,7 @@
 package com.holary.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.holary.entity.Order;
 import com.holary.entity.OrderDetail;
 import com.holary.entity.ShoppingCart;
@@ -139,6 +141,28 @@ public class OrderServiceImpl implements OrderService {
 
         map.put("code", 200);
         map.put("message", "提交订单成功!");
+        return map;
+    }
+
+    /**
+     * description: 订单分页查询和条件查询
+     *
+     * @param pageNum:     页码
+     * @param pageSize:    条数
+     * @param orderNumber: 订单号
+     * @param consignee:   收货人
+     * @param status:      状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> list(int pageNum, int pageSize, String orderNumber, String consignee, Integer status) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Order> orderList = orderMapper.list(orderNumber, consignee, status);
+        PageInfo<Order> orderPageInfo = new PageInfo<>(orderList);
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("code", 200);
+        map.put("paging", orderPageInfo);
         return map;
     }
 }

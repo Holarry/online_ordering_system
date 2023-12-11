@@ -10,4 +10,21 @@
         VALUES (#{orderNumber}, #{userId}, #{consignee}, #{consigneePhone}, #{address}, #{amount}, #{remark}, #{status},
                 #{orderTime})
     </insert>
+
+    <!--订单条件查询-->
+    <select id="list" resultType="com.holary.entity.Order">
+        select *
+        from `order`
+        <where>
+            <if test="orderNumber!=null and orderNumber != ''">
+                order_number = #{orderNumber}
+            </if>
+            <if test="consignee!=null and consignee != ''">
+                and consignee like concat('%', #{consignee},'%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>
