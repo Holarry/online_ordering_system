@@ -216,8 +216,21 @@
                     $("#tab").html('<tr><td colspan="10" align="center">没有订单数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问订单接口失败!");
+                layer.msg("访问订单接口失败!", function () {
+                    location.reload();
+                });
             }
+        });
+    }
+
+    // 打开订单详情
+    function orderDetail(orderNumber) {
+        let url = '../admin/order/getOrderDetail?orderNumber=' + orderNumber;
+        layer.open({
+            type: 2,
+            title: '订单详情',
+            area: ['500px', '450px'],
+            content: url
         });
     }
 
@@ -233,6 +246,14 @@
         $("#consignee").val("");
         $("form")[0].reset();
         selectOrderByCondition();
+    }
+
+    // addDishSuccessCallback 函数
+    function addDishSuccessCallback() {
+        // 关闭抽屉
+        layer.closeAll();
+        // 刷新页面数据
+        location.reload();
     }
 </script>
 </html>

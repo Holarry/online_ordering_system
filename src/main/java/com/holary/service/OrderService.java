@@ -1,7 +1,9 @@
 package com.holary.service;
 
+import com.holary.dto.OrderDetailDto;
 import com.holary.entity.Order;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,4 +31,21 @@ public interface OrderService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> list(int pageNum, int pageSize, String orderNumber, String consignee, Integer status);
+
+    /**
+     * description: 根据订单号查询订单详情
+     *
+     * @param orderNumber: 订单号
+     * @return: java.util.List<com.holary.dto.OrderDetailDto>
+     */
+    List<OrderDetailDto> getOrderDetail(String orderNumber);
+
+    /**
+     * description: 根据订单号修改订单状态
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> updateOrderStatus(String orderNumber, Integer status);
 }

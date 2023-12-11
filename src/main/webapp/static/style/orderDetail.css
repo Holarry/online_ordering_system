@@ -1,0 +1,25 @@
+.info-box {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.info-box .item-box {
+    display: flex;
+    height: 32px;
+    line-height: 32px;
+    color: #666666;
+}
+
+.info-box .item-box .label {
+    width: 96px;
+}
+
+.info-box .item-box .des {
+    flex: 1;
+    color: #333333;
+}
+
+.info-box .item-box span {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-size: 14px;
+}

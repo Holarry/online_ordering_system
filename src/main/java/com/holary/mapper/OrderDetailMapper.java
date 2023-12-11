@@ -1,5 +1,6 @@
 package com.holary.mapper;
 
+import com.holary.dto.OrderDetailDto;
 import com.holary.entity.OrderDetail;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,4 +19,12 @@ public interface OrderDetailMapper {
      * @return: void
      */
     void insertBatch(@Param("orderDetailList") List<OrderDetail> orderDetailList);
+
+    /**
+     * description: 根据订单号查询订单详情
+     *
+     * @param orderNumber: 订单号
+     * @return: java.util.List<com.holary.dto.OrderDetailDto>
+     */
+    List<OrderDetailDto> selectByOrderNumber(String orderNumber);
 }

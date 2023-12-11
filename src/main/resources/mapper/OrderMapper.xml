@@ -27,4 +27,18 @@
             </if>
         </where>
     </select>
+
+    <!--根据订单号查询订单-->
+    <select id="selectByOrderNumber" resultType="com.holary.entity.Order">
+        select *
+        from `order`
+        where order_number = #{orderNumber}
+    </select>
+
+    <!--根据订单号修改订单状态-->
+    <update id="updateByOrderNumber">
+        update `order`
+        set status = #{status}
+        where order_number = #{orderNumber}
+    </update>
 </mapper>

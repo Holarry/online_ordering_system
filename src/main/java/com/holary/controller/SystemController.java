@@ -102,6 +102,16 @@ public class SystemController {
     }
 
     /**
+     * description: 跳转订单详情
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goOrderDetail")
+    public String goOrderDetail() {
+        return "admin/orderDetail";
+    }
+
+    /**
      * description: 跳转菜单列表
      *
      * @return: java.lang.String

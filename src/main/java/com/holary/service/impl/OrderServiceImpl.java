@@ -2,6 +2,7 @@ package com.holary.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.holary.dto.OrderDetailDto;
 import com.holary.entity.Order;
 import com.holary.entity.OrderDetail;
 import com.holary.entity.ShoppingCart;
@@ -163,6 +164,50 @@ public class OrderServiceImpl implements OrderService {
         HashMap<String, Object> map = new HashMap<>();
         map.put("code", 200);
         map.put("paging", orderPageInfo);
+        return map;
+    }
+
+    /**
+     * description: 根据订单号查询订单详情
+     *
+     * @param orderNumber: 订单号
+     * @return: java.util.List<com.holary.dto.OrderDetailDto>
+     */
+    @Override
+    public List<OrderDetailDto> getOrderDetail(String orderNumber) {
+        return orderDetailMapper.selectByOrderNumber(orderNumber);
+    }
+
+    /**
+     * description: 根据订单号修改订单状态
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> updateOrderStatus(String orderNumber, Integer status) {
+        HashMap<String, Object> map = new HashMap<>();
+        // 判断订单号是否存在
+        Order order = orderMapper.selectByOrderNumber(orderNumber);
+        if (order == null) {
+            map.put("code", -1);
+            map.put("message", "订单号不存在!");
+            return map;
+        }
+        // 修改订单状态
+        if (status == 1) {
+            orderMapper.updateByOrderNumber(orderNumber, 2);
+            map.put("code", 200);
+            map.put("message", "订单已派送!");
+        } else if (status == 2) {
+            orderMapper.updateByOrderNumber(orderNumber, 3);
+            map.put("code", 200);
+            map.put("message", "订单已完成!");
+        } else {
+            map.put("code", -2);
+            map.put("message", "订单状态错误!");
+        }
         return map;
     }
 }

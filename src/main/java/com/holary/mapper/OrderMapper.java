@@ -28,4 +28,21 @@ public interface OrderMapper {
      * @return: java.util.List<com.holary.entity.Order>
      */
     List<Order> list(@Param("orderNumber") String orderNumber, @Param("consignee") String consignee, @Param("status") Integer status);
+
+    /**
+     * description: 根据订单号查询订单
+     *
+     * @param orderNumber: 订单号
+     * @return: com.holary.entity.Order
+     */
+    Order selectByOrderNumber(String orderNumber);
+
+    /**
+     * description: 根据订单号修改订单状态
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: void
+     */
+    void updateByOrderNumber(@Param("orderNumber") String orderNumber, @Param("status") int status);
 }
