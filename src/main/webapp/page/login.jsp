@@ -70,20 +70,19 @@
                 username: $("#username").val(),
                 password: $("#password").val(),
             }, success: function (data) {
-                console.log(data);
                 if (data.code === 200) {
-                    layer.msg("登录成功!", {icon: 6, time: 1000}, function () {
-                        location.href = "/sys/goIndex";
+                    layer.msg("登录成功!", {icon: 1, time: 1000}, function () {
+                        location.href = "../sys/goIndex";
                     });
                 } else if (data.code === -1 || data.code === -2 || data.code === -3) {
-                    layer.msg(data.message, {icon: 5});
+                    layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问登录接口失败!", {icon: 5}, function () {
+                layer.msg("访问登录接口失败!", function () {
                     location.reload();
                 });
             }
-        })
+        });
     }
 
     // 校验用户名

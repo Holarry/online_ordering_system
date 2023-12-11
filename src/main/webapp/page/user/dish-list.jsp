@@ -74,7 +74,6 @@
             type: "GET",
             dataType: "JSON",
             success: function (data) {
-                console.log(data);
                 // 清空原有的选项
                 $("#categoryName").empty().append();
                 // 添加默认选项
@@ -86,7 +85,9 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!");
+                layer.msg("访问分类接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -109,10 +110,12 @@
                 if (data.code === 200) {
                     renderDishList(data.dishList);
                 } else {
-                    layer.msg("查询数据失败!", {icon: 5});
+                    layer.msg("查询数据失败!", {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问菜品接口失败!", {icon: 5});
+                layer.msg("访问菜品接口失败!", function () {
+                    location.reload();
+                });
             }
         });
 
@@ -162,11 +165,13 @@
                         }
                     });
                 } else {
-                    layer.msg("获取购物车信息失败!", {icon: 5});
+                    layer.msg("获取购物车信息失败!", {icon: 2});
                 }
             },
             error: function () {
-                layer.msg("访问购物车接口失败!", {icon: 5});
+                layer.msg("访问购物车接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -198,17 +203,18 @@
             contentType: "application/json",
             data: JSON.stringify(shoppingCart),
             success: function (data) {
-                console.log(data)
                 if (data.code === 200) {
-                    layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                    layer.msg(data.message, {icon: 1, time: 1000}, function () {
                         updateCartControls(dishId, data.shoppingCart.number);
                     });
                 } else {
-                    layer.msg(data.message, {icon: 5});
+                    layer.msg(data.message, {icon: 2});
                 }
             },
             error: function () {
-                layer.msg("访问购物车接口失败!", {icon: 5});
+                layer.msg("访问购物车接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -254,10 +260,12 @@
                         location.reload();
                     }
                 } else {
-                    layer.msg(data.message, {icon: 5});
+                    layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问更新购物车接口失败!", {icon: 5});
+                layer.msg("访问更新购物车接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }

@@ -99,7 +99,9 @@
                     $("#totalAmount").text("总计: " + data.totalAmount.toFixed(2) + "元");
                 }
             }, error: function () {
-                layer.msg("访问计算总金额接口失败!", {icon: 5});
+                layer.msg("访问计算总金额接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -116,7 +118,9 @@
                     shoppingCartList = data.shoppingCartList;
                 }
             }, error: function () {
-                layer.msg("访问购物车接口失败!", {icon: 5});
+                layer.msg("访问购物车接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -146,17 +150,17 @@
             data: JSON.stringify(order),
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                console.log(data);
                 if (data.code === 200) {
-                    layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                    layer.msg(data.message, {icon: 1, time: 1000}, function () {
                         notifyParentPage();
                     });
                 } else if (data.code === -1 || data.code === -2 || data.code === -3 || data.code === -4 || data.code === -5) {
-                    layer.msg(data.message, {icon: 5});
+                    layer.msg(data.message, {icon: 2});
                 }
-            }, error: function (err) {
-                console.log(err);
-                layer.msg("访问提交订单接口失败!", {icon: 5});
+            }, error: function () {
+                layer.msg("访问提交订单接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }

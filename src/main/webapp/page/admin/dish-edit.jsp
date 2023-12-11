@@ -119,7 +119,6 @@
             type: "GET",
             dataType: "JSON",
             success: function (data) {
-                console.log(data);
                 // 清空原有的选项
                 $("#categoryName").empty().append();
                 // 添加默认选项
@@ -135,7 +134,9 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!");
+                layer.msg("访问分类接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -149,7 +150,6 @@
             elem: '#upload-dish-image',
             url: '/file/upload',
             done: function (data) {
-                console.log(data);
                 layer.msg('上传成功');
                 // 展示图片
                 $('#upload-dish-image-preview').find('img').attr('src', data.url);
@@ -194,16 +194,15 @@
             data: JSON.stringify(dish),
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                console.log(data);
                 if (data.code === 200) {
-                    layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                    layer.msg(data.message, {icon: 1, time: 1000}, function () {
                         notifyParentPage();
                     });
                 } else if (data.code === -1 || data.code === -2 || data.code === -3 || data.code === -4) {
-                    layer.msg(data.message, {icon: 5});
+                    layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg('访问修改菜品接口失败!', {icon: 5}, function () {
+                layer.msg('访问修改菜品接口失败!', function () {
                     location.reload();
                 });
             }

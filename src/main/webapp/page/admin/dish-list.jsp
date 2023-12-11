@@ -72,16 +72,16 @@
     <table class="layui-table-d layui-table">
         <thead>
         <tr>
-            <td>编号</td>
-            <td>菜品名称</td>
-            <td>分类</td>
-            <td>价格</td>
-            <td>图片</td>
-            <td>描述</td>
-            <td>状态</td>
-            <td style="width: 240px">创建时间</td>
-            <td style="width: 240px">修改时间</td>
-            <td style="width: 160px">操作</td>
+            <th>编号</th>
+            <th>菜品名称</th>
+            <th>分类</th>
+            <th>价格</th>
+            <th>图片</th>
+            <th>描述</th>
+            <th>状态</th>
+            <th style="width: 240px">创建时间</th>
+            <th style="width: 240px">修改时间</th>
+            <th style="width: 160px">操作</th>
         </tr>
         </thead>
         <tbody id="tab"></tbody>
@@ -94,7 +94,16 @@
 </div>
 </body>
 <script type="text/javascript">
-    $(document).ready(function enterJudge() {
+    // 总页数
+    let totalPages = 0;
+    // 总条数
+    let totalCounts = 0;
+    // 当前页
+    let currentPage = 0;
+    // 编号
+    let count = 1;
+
+    $(document).ready(function () {
         // 页面加载时获取分类列表
         getCategoryList();
 
@@ -108,23 +117,15 @@
             }
         });
     });
-    // 总页数
-    let totalPages = 0;
-    // 总条数
-    let totalCounts = 0;
-    // 当前页
-    let currentPage = 0;
-    // 页面一加载后就执行, 这里就是查询信息
-    $(document).ready(function () {
-        // 执行全查
+
+    // 分页
+    function page() {
+        // 初始化
         selectAll(1);
-        // 加载按钮
+        // 加载数据
         $("#pagination1").jqPaginator({
-            // 总页数
             totalPages: totalPages,
-            // 总条数
             totalCounts: totalCounts,
-            // 当前页
             currentPage: currentPage,
             // 加载按钮
             first: '<li class="first"><a href="javascript:void(0);">首页</a></li>',
@@ -136,10 +137,13 @@
                 // 当页面一改变就执行
                 selectAll(number);
             }
-        })
-    })
+        });
+    }
 
-    let count = 1;
+    // 页面一加载后就执行, 这里就是查询信息
+    $(document).ready(function () {
+        page();
+    });
 
     //全查
     function selectAll(number) {
@@ -205,31 +209,16 @@
                     $("#tab").html('<tr><td colspan="10" align="center">没有菜品数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问菜品接口失败!");
+                layer.msg("访问菜品接口失败!", function () {
+                    location.reload();
+                });
             }
-        })
+        });
     }
 
     // 条件查询
     function selectDishByCondition() {
-        // 初始化
-        selectAll(1);
-        // 加载数据
-        $("#pagination1").jqPaginator({
-            totalPages: totalPages,
-            totalCounts: totalCounts,
-            currentPage: currentPage,
-            // 加载按钮
-            first: '<li class="first"><a href="javascript:void(0);">首页</a></li>',
-            prev: '<li class="prev"><a href="javascript:void(0);">上一页</a></li>',
-            next: '<li class="next"><a href="javascript:void(0);">下一页</a></li>',
-            last: '<li class="last"><a href="javascript:void(0);">末页</a></li>',
-            page: '<li class="page"><a href="javascript:void(0);">{{page}}</a></li>',
-            onPageChange: function (number) {
-                // 当页面一改变就执行
-                selectAll(number);
-            }
-        });
+        page();
     }
 
     // 重置
@@ -250,7 +239,6 @@
             type: "GET",
             dataType: "JSON",
             success: function (data) {
-                console.log(data);
                 // 清空原有的选项
                 $("#categoryName").empty().append();
                 // 添加默认选项
@@ -261,9 +249,10 @@
                 }
                 // 刷新select渲染
                 layui.form.render('select');
-            }, error: function (err) {
-                console.log(err);
-                layer.msg("访问分类接口失败!");
+            }, error: function () {
+                layer.msg("访问分类接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -289,8 +278,7 @@
             type: "GET",
             data: {
                 id: dishId
-            }, success: function (data) {
-                console.log(data);
+            }, success: function () {
                 layer.open({
                     type: 2,
                     title: '编辑菜品',
@@ -318,18 +306,16 @@
                 data: {
                     id: dishId
                 }, success: function (data) {
-                    console.log(data);
                     if (data.code === 200) {
-                        layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                        layer.msg(data.message, {icon: 1, time: 1000}, function () {
                             x_admin_close();
                             location.reload();
                         });
                     } else if (data.code === -1 || data.code === -2) {
-                        layer.msg(data.message, {icon: 5});
+                        layer.msg(data.message, {icon: 2});
                     }
-                }, error(err) {
-                    console.log(err);
-                    layer.msg("访问删除菜品接口失败!", {icon: 5}, function () {
+                }, error() {
+                    layer.msg("访问删除菜品接口失败!", function () {
                         location.reload();
                     });
                 }

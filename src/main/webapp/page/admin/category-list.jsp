@@ -35,12 +35,12 @@
     <table class="layui-table-d layui-table">
         <thead>
         <tr>
-            <td>编号</td>
-            <td>分类名称</td>
-            <td>排序</td>
-            <td>创建时间</td>
-            <td>修改时间</td>
-            <td>操作</td>
+            <th>编号</th>
+            <th>分类名称</th>
+            <th>排序</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody id="tab"></tbody>
@@ -79,7 +79,9 @@
                     $("#tab").html('<tr><td colspan="6" align="center">没有分类数据</td></tr>');
                 }
             }, error: function () {
-                alert("访问分类接口失败!");
+                layer.msg("访问分类接口失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -95,7 +97,9 @@
                 // 处理编辑操作
                 x_admin_show('编辑分类', '/admin/category/getDetailInfo?id=' + categoryId, 500, 281);
             }, error: function () {
-                layui.msg("获取分类信息失败!");
+                layer.msg("获取分类信息失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -114,15 +118,15 @@
                     id: categoryId
                 }, success: function (data) {
                     if (data.code === 200) {
-                        layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                        layer.msg(data.message, {icon: 1, time: 1000}, function () {
                             x_admin_close();
                             location.reload();
                         });
                     } else if (data.code === -1 || data.code === -2) {
-                        layer.msg(data.message, {icon: 5});
+                        layer.msg(data.message, {icon: 2});
                     }
                 }, error() {
-                    layer.msg("访问删除分类接口失败!", {icon: 5}, function () {
+                    layer.msg("访问删除分类接口失败!", function () {
                         location.reload();
                     });
                 }

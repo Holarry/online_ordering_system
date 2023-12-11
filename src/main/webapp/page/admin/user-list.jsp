@@ -77,15 +77,15 @@
     <table class="layui-table-d layui-table">
         <thead>
         <tr>
-            <td>编号</td>
-            <td>用户名</td>
-            <td>年龄</td>
-            <td>性别</td>
-            <td>手机号</td>
-            <td>状态</td>
-            <td style="width: 200px">创建时间</td>
-            <td style="width: 200px">修改时间</td>
-            <td style="width: 150px">操作</td>
+            <th>编号</th>
+            <th>用户名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>手机号</th>
+            <th>状态</th>
+            <th style="width: 200px">创建时间</th>
+            <th style="width: 200px">修改时间</th>
+            <th style="width: 150px">操作</th>
         </tr>
         </thead>
         <tbody id="tab"></tbody>
@@ -98,8 +98,17 @@
 </div>
 </body>
 <script type="text/javascript">
+    // 总页数
+    let totalPages = 0;
+    // 总条数
+    let totalCounts = 0;
+    // 当前页
+    let currentPage = 0;
+    // 编号
+    let count = 1;
+
     // 解决enter键问题
-    $(document).ready(function enterJudge() {
+    $(document).ready(function () {
         $(this).keydown(function (e) {
             if (e.which === 13) {
                 if ($("#username").val() !== '' || $("#gender").val() !== '' || $("#status").val() !== '') {
@@ -107,17 +116,11 @@
                     return false;
                 }
             }
-        })
-    })
-    // 总页数
-    let totalPages = 0;
-    // 总条数
-    let totalCounts = 0;
-    // 当前页
-    let currentPage = 0;
-    // 页面一加载后就执行, 这里就是查询信息
-    $(document).ready(function () {
-        // 执行全查
+        });
+    });
+
+    function page() {
+        // 初始化
         selectAll(1);
         // 加载按钮
         $("#pagination1").jqPaginator({
@@ -137,10 +140,13 @@
                 // 当页面一改变就执行
                 selectAll(number);
             }
-        })
-    })
+        });
+    }
 
-    let count = 1;
+    // 页面一加载后就执行, 这里就是查询信息
+    $(document).ready(function () {
+        page();
+    });
 
     //全查
     function selectAll(number) {
@@ -204,31 +210,16 @@
                     $("#tab").html('<tr><td colspan="9" align="center">没有用户数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问用户接口失败!");
+                layer.msg("访问用户接口失败!", function () {
+                    location.reload();
+                });
             }
-        })
+        });
     }
 
     // 条件查询
     function selectUserByCondition() {
-        // 初始化
-        selectAll(1);
-        // 加载数据
-        $("#pagination1").jqPaginator({
-            totalPages: totalPages,
-            totalCounts: totalCounts,
-            currentPage: currentPage,
-            // 加载按钮
-            first: '<li class="first"><a href="javascript:void(0);">首页</a></li>',
-            prev: '<li class="prev"><a href="javascript:void(0);">上一页</a></li>',
-            next: '<li class="next"><a href="javascript:void(0);">下一页</a></li>',
-            last: '<li class="last"><a href="javascript:void(0);">末页</a></li>',
-            page: '<li class="page"><a href="javascript:void(0);">{{page}}</a></li>',
-            onPageChange: function (number) {
-                // 当页面一改变就执行
-                selectAll(number);
-            }
-        })
+        page();
     }
 
     // 重置
@@ -253,7 +244,9 @@
                 // 处理编辑操作
                 x_admin_show('编辑用户', '/admin/user/getDetailInfo?id=' + userId, 500, 455);
             }, error: function () {
-                layer.msg("获取用户信息失败!");
+                layer.msg("获取用户信息失败!", function () {
+                    location.reload();
+                });
             }
         });
     }
@@ -272,15 +265,15 @@
                     id: userId
                 }, success: function (data) {
                     if (data.code === 200) {
-                        layer.msg(data.message, {icon: 6, time: 1000}, function () {
+                        layer.msg(data.message, {icon: 1, time: 1000}, function () {
                             x_admin_close();
                             location.reload();
                         });
                     } else if (data.code === -1) {
-                        layer.msg(data.message, {icon: 5});
+                        layer.msg(data.message, {icon: 2});
                     }
                 }, error() {
-                    layer.msg("访问删除用户接口失败!", {icon: 5}, function () {
+                    layer.msg("访问删除用户接口失败!", function () {
                         location.reload();
                     });
                 }
