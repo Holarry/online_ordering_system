@@ -27,4 +27,13 @@ public interface OrderDetailMapper {
      * @return: java.util.List<com.holary.dto.OrderDetailDto>
      */
     List<OrderDetailDto> selectByOrderNumber(String orderNumber);
+
+    /**
+     * description: 根据用户id和订单号查询订单详情
+     *
+     * @param userId:      用户id
+     * @param orderNumber: 订单号
+     * @return: java.util.List<com.holary.dto.OrderDetailDto>
+     */
+    List<OrderDetailDto> selectByUserIdAndOrderNumber(@Param("userId") Integer userId, @Param("orderNumber") String orderNumber);
 }

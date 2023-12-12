@@ -140,4 +140,14 @@ public class SystemController {
     public String goSubmitOrder() {
         return "user/submit-order";
     }
+
+    /**
+     * description: 跳转我的订单列表
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goUserOrderList")
+    public String goUserOrderList() {
+        return "user/order-list";
+    }
 }

@@ -210,4 +210,37 @@ public class OrderServiceImpl implements OrderService {
         }
         return map;
     }
+
+    /**
+     * description: 用户条件查询订单
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> list1(String orderNumber, Integer status) {
+        HashMap<String, Object> map = new HashMap<>();
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        List<Order> orderList = orderMapper.selectByUserId(userId, orderNumber, status);
+        map.put("code", 200);
+        map.put("orderList", orderList);
+        return map;
+    }
+
+    /**
+     * description: 用户查询订单详情
+     *
+     * @param orderNumber: 订单号
+     * @return: java.util.List<com.holary.dto.OrderDetailDto>
+     */
+    @Override
+    public List<OrderDetailDto> getOrderDetailByUserId(String orderNumber) {
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        return orderDetailMapper.selectByUserIdAndOrderNumber(userId, orderNumber);
+    }
 }

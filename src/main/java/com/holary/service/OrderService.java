@@ -48,4 +48,21 @@ public interface OrderService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> updateOrderStatus(String orderNumber, Integer status);
+
+    /**
+     * description: 用户条件查询订单
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> list1(String orderNumber, Integer status);
+
+    /**
+     * description: 用户查询订单详情
+     *
+     * @param orderNumber: 订单号
+     * @return: java.util.List<com.holary.dto.OrderDetailDto>
+     */
+    List<OrderDetailDto> getOrderDetailByUserId(String orderNumber);
 }

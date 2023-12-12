@@ -41,4 +41,19 @@
         set status = #{status}
         where order_number = #{orderNumber}
     </update>
+
+    <!--用户条件查询订单-->
+    <select id="selectByUserId" resultType="com.holary.entity.Order">
+        select *
+        from `order`
+        <where>
+            user_id = #{userId}
+            <if test="orderNumber != null and orderNumber != ''">
+                and order_number = #{orderNumber}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>

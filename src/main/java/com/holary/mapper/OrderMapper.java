@@ -45,4 +45,14 @@ public interface OrderMapper {
      * @return: void
      */
     void updateByOrderNumber(@Param("orderNumber") String orderNumber, @Param("status") int status);
+
+    /**
+     * description: 用户条件查询订单
+     *
+     * @param userId:      用户id
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.List<com.holary.entity.Order>
+     */
+    List<Order> selectByUserId(@Param("userId") Integer userId, @Param("orderNumber") String orderNumber, @Param("status") Integer status);
 }
