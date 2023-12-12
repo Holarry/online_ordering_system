@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.holary.mapper.UserMapper">
     <!--条件查询用户-->
-    <select id="selectAll" resultType="user">
+    <select id="selectAll" resultType="com.holary.entity.User">
         select * from user
         <where>
             username != 'admin'
@@ -22,7 +22,7 @@
     </select>
 
     <!--根据用户名查询用户-->
-    <select id="selectByUsername" resultType="user">
+    <select id="selectByUsername" resultType="com.holary.entity.User">
         select *
         from user
         where username = #{username}
@@ -41,7 +41,7 @@
     </insert>
 
     <!--根据用户id查询用户信息-->
-    <select id="selectById" resultType="user">
+    <select id="selectById" resultType="com.holary.entity.User">
         select *
         from user
         where id = #{id}

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.holary.mapper.LoginMapper">
     <!--自定义映射-->
-    <resultMap id="userMap" type="user">
+    <resultMap id="userMap" type="com.holary.entity.User">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
