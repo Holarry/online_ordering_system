@@ -65,4 +65,13 @@ public interface OrderService {
      * @return: java.util.List<com.holary.dto.OrderDetailDto>
      */
     List<OrderDetailDto> getOrderDetailByUserId(String orderNumber);
+
+    /**
+     * description: 用户修改订单状态(取消订单, 确认订单)
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> updateOrderStatusByUserId(String orderNumber, Integer status);
 }

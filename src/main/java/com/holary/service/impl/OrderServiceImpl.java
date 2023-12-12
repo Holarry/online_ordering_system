@@ -197,11 +197,13 @@ public class OrderServiceImpl implements OrderService {
         }
         // 修改订单状态
         if (status == 1) {
+            // 派送订单
             orderMapper.updateByOrderNumber(orderNumber, 2);
             map.put("code", 200);
-            map.put("message", "订单已派送!");
-        } else if (status == 2) {
-            orderMapper.updateByOrderNumber(orderNumber, 3);
+            map.put("message", "订单派送中!");
+        } else if (status == 3) {
+            // 完成订单
+            orderMapper.updateByOrderNumber(orderNumber, 4);
             map.put("code", 200);
             map.put("message", "订单已完成!");
         } else {
@@ -242,5 +244,43 @@ public class OrderServiceImpl implements OrderService {
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
         Integer userId = user.getId();
         return orderDetailMapper.selectByUserIdAndOrderNumber(userId, orderNumber);
+    }
+
+    /**
+     * description: 用户修改订单状态(取消订单, 确认订单)
+     *
+     * @param orderNumber: 订单号
+     * @param status:      订单状态
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> updateOrderStatusByUserId(String orderNumber, Integer status) {
+        HashMap<String, Object> map = new HashMap<>();
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        List<Order> orderList = orderMapper.selectByUserId(userId, orderNumber, status);
+        // 判断订单是否存在
+        if (orderList == null || orderList.isEmpty()) {
+            map.put("code", -1);
+            map.put("message", "订单号不存在!");
+            return map;
+        }
+        // 修改订单状态
+        if (status == 1) {
+            // 取消订单
+            orderMapper.updateByOrderNumber(orderNumber, 0);
+            map.put("code", 200);
+            map.put("message", "取消订单成功!");
+        } else if (status == 2) {
+            // 确认订单
+            orderMapper.updateByOrderNumber(orderNumber, 3);
+            map.put("code", 200);
+            map.put("message", "确认订单成功!");
+        } else {
+            map.put("code", -2);
+            map.put("message", "订单状态错误!");
+        }
+        return map;
     }
 }

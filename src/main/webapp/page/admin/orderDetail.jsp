@@ -32,6 +32,12 @@
                 <span class="label">订单号: </span>
                 <span class="des">${orderDetail.orderNumber}</span>
             </div>
+            <c:if test="${orderDetail.status == 0}">
+                <div class="item-box">
+                    <span class="label">订单状态: </span>
+                    <span class="des">已取消</span>
+                </div>
+            </c:if>
             <c:if test="${orderDetail.status == 1}">
                 <div class="item-box">
                     <span class="label">订单状态: </span>
@@ -45,6 +51,12 @@
                 </div>
             </c:if>
             <c:if test="${orderDetail.status == 3}">
+                <div class="item-box">
+                    <span class="label">订单状态: </span>
+                    <span class="des">已确认</span>
+                </div>
+            </c:if>
+            <c:if test="${orderDetail.status == 4}">
                 <div class="item-box">
                     <span class="label">订单状态: </span>
                     <span class="des">已完成</span>
@@ -76,7 +88,7 @@
                         class="layui-btn layui-btn-normal">派送
                 </button>
             </c:if>
-            <c:if test="${orderDetail.status == 2}">
+            <c:if test="${orderDetail.status == 3}">
                 <button style="margin-top: 10px" type="button"
                         onclick="updateOrderStatus(${orderDetail.orderNumber}, ${orderDetail.status})"
                         class="layui-btn layui-btn-normal">完成

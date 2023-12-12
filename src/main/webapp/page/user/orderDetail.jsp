@@ -32,6 +32,12 @@
                 <span class="label">订单号: </span>
                 <span class="des">${orderDetail.orderNumber}</span>
             </div>
+            <c:if test="${orderDetail.status == 0}">
+                <div class="item-box">
+                    <span class="label">订单状态: </span>
+                    <span class="des">已取消</span>
+                </div>
+            </c:if>
             <c:if test="${orderDetail.status == 1}">
                 <div class="item-box">
                     <span class="label">订单状态: </span>
@@ -45,6 +51,12 @@
                 </div>
             </c:if>
             <c:if test="${orderDetail.status == 3}">
+                <div class="item-box">
+                    <span class="label">订单状态: </span>
+                    <span class="des">已确认</span>
+                </div>
+            </c:if>
+            <c:if test="${orderDetail.status == 4}">
                 <div class="item-box">
                     <span class="label">订单状态: </span>
                     <span class="des">已完成</span>
@@ -70,8 +82,71 @@
                         value="${orderDetail.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </span>
             </div>
+            <c:if test="${orderDetail.status == 1}">
+                <button style="margin-top: 10px" type="button"
+                        onclick="updateOrderStatus(${orderDetail.orderNumber}, ${orderDetail.status})"
+                        class="layui-btn layui-btn-normal">取消订单
+                </button>
+            </c:if>
+            <c:if test="${orderDetail.status == 2}">
+                <button style="margin-top: 10px" type="button"
+                        onclick="updateOrderStatus(${orderDetail.orderNumber}, ${orderDetail.status})"
+                        class="layui-btn layui-btn-normal">确认收货
+                </button>
+            </c:if>
         </c:if>
     </c:forEach>
 </div>
 </body>
+<script type="text/javascript">
+    function updateOrderStatus(orderNumber, status) {
+        if (status === 1) {
+            // 在取消订单时弹出确认框
+            layer.confirm('您确认取消订单吗?', {icon: 3, title: '提示'}, function (index) {
+                // 确认取消
+                doUpdateOrderStatus(orderNumber, status);
+                // 关闭确认框
+                layer.close(index);
+            });
+        } else {
+            doUpdateOrderStatus(orderNumber, status);
+        }
+    }
+
+    // 修改订单状态
+    function doUpdateOrderStatus(orderNumber, status) {
+        $.ajax({
+            url: "../../user/order/updateOrderStatus",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                orderNumber: orderNumber,
+                status: status
+            }, success: function (data) {
+                if (data.code === 200) {
+                    layer.msg(data.message, {icon: 1, time: 1000}, function () {
+                        notifyParentPage();
+                    });
+                } else if (data.code === -1 || data.code === -2) {
+                    layer.msg(data.message, {icon: 2});
+                }
+            }, error: function () {
+                layer.msg("访问修改订单状态接口失败!", function () {
+                    location.reload();
+                });
+            }
+        });
+    }
+
+    // 通知主页面关闭抽屉并刷新数据
+    function notifyParentPage() {
+        // 获取主页面的全局对象
+        let parentPage = window.parent;
+
+        // 调用主页面定义的回调函数
+        if (parentPage.addDishSuccessCallback) {
+            parentPage.addDishSuccessCallback();
+        }
+    }
+</script>
 </html>

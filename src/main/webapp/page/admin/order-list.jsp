@@ -59,8 +59,10 @@
     <!-- 切换栏 -->
     <div class="status-switch">
         <button class="layui-btn layui-btn-primary" type="button" onclick="selectAll(1, null)">全部</button>
+        <button class="layui-btn layui-btn-primary" type="button" onclick="selectAll(1, '已取消')">已取消</button>
         <button class="layui-btn layui-btn-primary" type="button" onclick="selectAll(1, '已下单')">已下单</button>
         <button class="layui-btn layui-btn-primary" type="button" onclick="selectAll(1, '派送中')">派送中</button>
+        <button class="layui-btn layui-btn-primary" type="button" onclick="selectAll(1, '已确认')">已确认</button>
         <button class="layui-btn layui-btn-primary" type="button" onclick="selectAll(1, '已完成')">已完成</button>
     </div>
     <table class="layui-table-d layui-table">
@@ -155,12 +157,17 @@
 
     //全查
     function selectAll(number, status) {
-        if (status === '已下单') {
+        // 转换status
+        if (status === '已取消') {
+            status = 0;
+        } else if (status === '已下单') {
             status = 1;
         } else if (status === '派送中') {
             status = 2;
-        } else if (status === '已完成') {
+        } else if (status === '已确认') {
             status = 3;
+        } else if (status === '已完成') {
+            status = 4;
         } else {
             status = null;
         }
@@ -187,11 +194,15 @@
                     let str = ''; // 用str变量拼接字符串
                     for (let i = 0; i < orderList.length; i++) {
                         let status;
-                        if (orderList[i].status === 1) {
+                        if (orderList[i].status === 0) {
+                            status = '已取消';
+                        } else if (orderList[i].status === 1) {
                             status = '已下单';
                         } else if (orderList[i].status === 2) {
                             status = '派送中';
                         } else if (orderList[i].status === 3) {
+                            status = '已确认';
+                        } else if (orderList[i].status === 4) {
                             status = '已完成';
                         }
 

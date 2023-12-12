@@ -40,8 +40,10 @@
                 <label for="status">
                     <select id="status" style="margin-right: 25px;">
                         <option value="">请选择</option>
+                        <option value="已取消">已取消</option>
                         <option value="已下单">已下单</option>
                         <option value="派送中">派送中</option>
+                        <option value="已确认">已确认</option>
                         <option value="已完成">已完成</option>
                     </select>
                 </label>
@@ -84,12 +86,16 @@
     function selectOrder() {
         // 转换status
         let status = $('#status').val();
-        if (status === '已下单') {
+        if (status === '已取消') {
+            status = 0;
+        } else if (status === '已下单') {
             status = 1;
         } else if (status === '派送中') {
             status = 2;
-        } else if (status === '已完成') {
+        } else if (status === '已确认') {
             status = 3;
+        } else if (status === '已完成') {
+            status = 4;
         } else {
             status = null;
         }
@@ -107,11 +113,15 @@
                         let str = '';
                         for (let i = 0; i < orderList.length; i++) {
                             let status;
-                            if (orderList[i].status === 1) {
+                            if (orderList[i].status === 0) {
+                                status = '已取消';
+                            } else if (orderList[i].status === 1) {
                                 status = '已下单';
                             } else if (orderList[i].status === 2) {
                                 status = '派送中';
                             } else if (orderList[i].status === 3) {
+                                status = '已确认';
+                            } else if (orderList[i].status === 4) {
                                 status = '已完成';
                             }
                             str += '<tr>' +
@@ -160,6 +170,14 @@
         $("#status").val("");
         $("form")[0].reset();
         selectOrder();
+    }
+
+    // addDishSuccessCallback 函数
+    function addDishSuccessCallback() {
+        // 关闭抽屉
+        layer.closeAll();
+        // 刷新页面数据
+        location.reload();
     }
 </script>
 </html>
