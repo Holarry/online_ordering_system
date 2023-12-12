@@ -21,21 +21,15 @@
     <div class="layui-nav-d layui-header">
         <img src="../static/images/logo2.jpg" alt="图片未找到" style="margin-top:15px;margin-left:25px;width:10%"/>
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block" style="margin-right: 10px">
                 <a href="javascript:">
                     <img src="../static/images/avatar.png"
                          class="layui-nav-img" alt="图片未找到">
                     <shiro:principal/>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:" target="right">个人信息</a></dd>
                     <dd><a href="../logout">退出登录</a></dd>
                 </dl>
-            </li>
-            <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
-                <a href="javascript:">
-                    <i class="layui-icon layui-icon-more-vertical"></i>
-                </a>
             </li>
         </ul>
     </div>
@@ -86,14 +80,14 @@
                     </li>
                     <li class="layui-nav-item-d layui-nav-item">
                         <a href="javascript:" target="right">
-                            <i class="layui-icon layui-icon-note"></i>
-                            <span>地址管理</span>
+                            <i class="layui-icon layui-icon-notice"></i>
+                            <span>我的订单</span>
                         </a>
                     </li>
                     <li class="layui-nav-item-d layui-nav-item">
                         <a href="javascript:" target="right">
-                            <i class="layui-icon layui-icon-notice"></i>
-                            <span>我的订单</span>
+                            <i class="layui-icon layui-icon-username"></i>
+                            <span>个人中心</span>
                         </a>
                     </li>
                 </shiro:hasRole>
@@ -128,20 +122,7 @@
             menuLeft: function () {
                 layer.msg('展开左侧菜单的操作', {icon: 0});
             }
-            , menuRight: function () {
-                layer.open({
-                    type: 1,
-                    title: '介绍',
-                    content: '<div style="padding: 15px;">在线点餐系统管理端</div>',
-                    area: ['260px', '100%'],
-                    offset: 'rt', //右上角
-                    anim: 'slideLeft', // 从右侧抽屉滑出
-                    shadeClose: true,
-                    scrollbar: false
-                });
-            }
         });
-
     });
 </script>
 </body>
