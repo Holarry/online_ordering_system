@@ -144,9 +144,7 @@
                     }
                 }
             }, error() {
-                layer.msg("访问查询订单接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问查询订单接口失败!");
             }
         });
     }

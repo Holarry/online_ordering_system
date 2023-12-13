@@ -61,6 +61,7 @@
         // 获取分类
         getCategoryList();
 
+        // 获取购物车
         getShoppingCartList();
 
         // 查询菜品
@@ -85,9 +86,7 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问分类接口失败!");
             }
         });
     }
@@ -113,9 +112,7 @@
                     layer.msg("查询数据失败!", {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问菜品接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问菜品接口失败!");
             }
         });
 
@@ -151,6 +148,7 @@
         }
     }
 
+    // 获取购物车
     function getShoppingCartList() {
         $.ajax({
             url: "/user/shoppingCart/list",
@@ -169,9 +167,7 @@
                 }
             },
             error: function () {
-                layer.msg("访问购物车接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问购物车接口失败!");
             }
         });
     }
@@ -212,7 +208,7 @@
                 }
             },
             error: function () {
-                layer.msg("访问购物车接口失败!", function () {
+                layer.msg("访问加入购物车接口失败!", function () {
                     location.reload();
                 });
             }

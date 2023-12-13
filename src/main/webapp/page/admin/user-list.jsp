@@ -119,6 +119,7 @@
         });
     });
 
+    // 分页
     function page() {
         // 初始化
         selectAll(1);
@@ -210,9 +211,7 @@
                     $("#tab").html('<tr><td colspan="9" align="center">没有用户数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问用户接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问用户接口失败!");
             }
         });
     }
@@ -233,7 +232,7 @@
         selectUserByCondition();
     }
 
-    // 修改用户
+    // 编辑用户
     function editUser(userId) {
         $.ajax({
             url: "/admin/user/getDetailInfo",

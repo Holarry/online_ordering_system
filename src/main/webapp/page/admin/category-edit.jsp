@@ -51,6 +51,7 @@
 </div>
 </body>
 <script>
+    // 编辑分类
     function editCategory() {
         // 获取表单数据
         let id = ${category.id};

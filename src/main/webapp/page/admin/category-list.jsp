@@ -79,9 +79,7 @@
                     $("#tab").html('<tr><td colspan="6" align="center">没有分类数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问分类接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问分类接口失败!");
             }
         });
     }

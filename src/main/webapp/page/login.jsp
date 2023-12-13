@@ -90,7 +90,6 @@
         let checkUserNameResult = document.getElementById("checkUserNameResult");
         if (obj.trim().length === 0) {
             checkUserNameResult.innerHTML = "用户名不能为空";
-            obj.focus();
         } else {
             checkUserNameResult.innerHTML = "";
         }
@@ -101,7 +100,6 @@
         let checkPasswordResult = document.getElementById("checkPasswordResult");
         if (obj.trim().length === 0) {
             checkPasswordResult.innerHTML = "密码不能为空";
-            obj.focus();
         } else {
             checkPasswordResult.innerHTML = "";
         }

@@ -115,9 +115,7 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问分类接口失败!");
             }
         });
     }

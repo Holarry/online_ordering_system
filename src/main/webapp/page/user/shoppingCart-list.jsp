@@ -156,9 +156,7 @@
                     $("#totalAmount").text("总计: " + data.totalAmount.toFixed(2) + "元");
                 }
             }, error: function () {
-                layer.msg("访问计算总金额接口失败!", function () {
-                    location.reload();
-                });
+                layer.msg("访问计算总金额接口失败!");
             }
         });
     }
