@@ -85,4 +85,13 @@ public interface UserMapper {
      * @return: int
      */
     int deleteByUserRoleId(int id);
+
+    /**
+     * description: 根据用户id和用户名查询用户
+     *
+     * @param userId:   用户id
+     * @param username: 用户名
+     * @return: com.holary.entity.User
+     */
+    User selectByUserIdAndUsername(@Param("userId") Integer userId, @Param("username") String username);
 }

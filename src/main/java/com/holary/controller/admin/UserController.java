@@ -16,7 +16,7 @@ import java.util.Map;
  * @Date: 2023/11/20 15:40
  * @Description: UserController
  */
-@Controller
+@Controller("adminUserController")
 @RequestMapping("/admin/user")
 public class UserController {
     @Autowired

@@ -45,4 +45,12 @@ public interface UserService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> delete(Integer id);
+
+    /**
+     * description: 用户修改个人基本信息
+     *
+     * @param user: user对象
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> updatePersonalInfo(User user);
 }

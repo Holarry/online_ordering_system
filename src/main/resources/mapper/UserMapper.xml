@@ -99,4 +99,12 @@
         from user_role
         where id = #{id}
     </delete>
+
+    <!--根据用户id和用户名查询用户-->
+    <select id="selectByUserIdAndUsername" resultType="com.holary.entity.User">
+        select *
+        from user
+        where username = #{username}
+          and id != #{userId};
+    </select>
 </mapper>

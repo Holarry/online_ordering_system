@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li class="layui-nav-item-d layui-nav-item">
-                        <a href="javascript:" target="right">
+                        <a href="../user/user/getDetailInfo" target="right">
                             <i class="layui-icon layui-icon-username"></i>
                             <span>个人中心</span>
                         </a>
