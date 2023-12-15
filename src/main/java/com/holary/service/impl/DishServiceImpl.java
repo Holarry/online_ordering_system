@@ -7,6 +7,7 @@ import com.holary.entity.Dish;
 import com.holary.mapper.DishMapper;
 import com.holary.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -14,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: Holary
@@ -24,6 +27,9 @@ import java.util.Map;
 public class DishServiceImpl implements DishService {
     @Autowired
     private DishMapper dishMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * description: 分页查询和条件查询菜品
@@ -76,6 +82,8 @@ public class DishServiceImpl implements DishService {
             dish.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
             dish.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             dishMapper.insert(dish);
+            // 清理缓存
+            cleanCache("dish_*");
             map.put("code", 200);
             map.put("message", "添加菜品成功!");
         }
@@ -118,6 +126,8 @@ public class DishServiceImpl implements DishService {
         } else {
             dish.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             dishMapper.updateById(dish);
+            // 清理缓存
+            cleanCache("dish_*");
             map.put("code", 200);
             map.put("message", "修改菜品成功!");
         }
@@ -142,6 +152,8 @@ public class DishServiceImpl implements DishService {
         } else {
             int i = dishMapper.deleteById(id);
             if (i > 0) {
+                // 清理缓存
+                cleanCache("dish_*");
                 map.put("code", 200);
                 map.put("message", "删除菜品成功!");
             } else {
@@ -162,9 +174,31 @@ public class DishServiceImpl implements DishService {
     @Override
     public Map<String, Object> list1(String name, Integer categoryId) {
         HashMap<String, Object> map = new HashMap<>();
-        List<DishDto> dishList = dishMapper.selectAll1(name, categoryId);
+        // 构造key
+        String key = "dish_" + name + "_" + categoryId;
+        List<DishDto> dishList = (List<DishDto>) redisTemplate.opsForValue().get(key);
+        // 如果缓存中有数据直接返回
+        if (dishList != null && !dishList.isEmpty()) {
+            map.put("code", 200);
+            map.put("dishList", dishList);
+            return map;
+        }
+        // 如果缓存中没有数据则查询数据库,并将数据放入缓存中
+        dishList = dishMapper.selectAll1(name, categoryId);
+        redisTemplate.opsForValue().set(key, dishList, 30, TimeUnit.MINUTES);
         map.put("code", 200);
         map.put("dishList", dishList);
         return map;
+    }
+
+    /**
+     * description: 清理缓存中的数据
+     *
+     * @param pattern:
+     * @return: void
+     */
+    public void cleanCache(String pattern) {
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 }

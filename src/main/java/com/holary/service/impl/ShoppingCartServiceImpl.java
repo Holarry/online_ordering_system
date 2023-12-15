@@ -6,6 +6,7 @@ import com.holary.mapper.ShoppingCartMapper;
 import com.holary.service.ShoppingCartService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: Holary
@@ -24,6 +27,9 @@ import java.util.Map;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     private ShoppingCartMapper shoppingCartMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * description: 加入购物车
@@ -51,6 +57,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             shoppingCart1.setNumber(shoppingCart1.getNumber() + 1);
             shoppingCartMapper.updateNumberById(shoppingCart1);
         }
+
+        // 清理缓存
+        String key = "shoppingCart_" + userId;
+        cleanCache(key);
+
         ShoppingCart shoppingCart2 = shoppingCartMapper.selectByUserIdAndDishId(userId, shoppingCart.getDishId());
         map.put("code", 200);
         map.put("message", "添加购物车成功!");
@@ -69,7 +80,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         // 获取当前用户id
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
         Integer userId = user.getId();
-        List<ShoppingCart> shoppingCartList = shoppingCartMapper.selectByUserId(userId);
+        // 构造key
+        String key = "shoppingCart_" + userId;
+        List<ShoppingCart> shoppingCartList = (List<ShoppingCart>) redisTemplate.opsForValue().get(key);
+        // 如果缓存中有数据直接返回
+        if (shoppingCartList != null && !shoppingCartList.isEmpty()) {
+            map.put("code", 200);
+            map.put("shoppingCartList", shoppingCartList);
+            return map;
+        }
+        // 如果缓存中没有数据则查询数据库,并将数据放入缓存中
+        shoppingCartList = shoppingCartMapper.selectByUserId(userId);
+        redisTemplate.opsForValue().set(key, shoppingCartList, 30, TimeUnit.MINUTES);
         map.put("code", 200);
         map.put("shoppingCartList", shoppingCartList);
         return map;
@@ -108,6 +130,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             map.put("shoppingCart", shoppingCart);
             map.put("message", "修改菜品数量成功!");
         }
+
+        // 清理缓存
+        String key = "shoppingCart_" + userId;
+        cleanCache(key);
         return map;
     }
 
@@ -150,6 +176,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
         Integer userId = user.getId();
         shoppingCartMapper.deleteByUserIdAndDishId(userId, dishId);
+
+        // 清理缓存
+        String key = "shoppingCart_" + userId;
+        cleanCache(key);
+
         map.put("code", 200);
         map.put("message", "删除菜品成功!");
         return map;
@@ -167,8 +198,24 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
         Integer userId = user.getId();
         shoppingCartMapper.deleteByUserId(userId);
+
+        // 清理缓存
+        String key = "shoppingCart_" + userId;
+        cleanCache(key);
+
         map.put("code", 200);
         map.put("message", "清空购物车成功!");
         return map;
+    }
+
+    /**
+     * description: 清理缓存中的数据
+     *
+     * @param pattern:
+     * @return: void
+     */
+    public void cleanCache(String pattern) {
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 }

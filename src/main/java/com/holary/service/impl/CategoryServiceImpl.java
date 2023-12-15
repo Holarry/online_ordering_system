@@ -6,6 +6,7 @@ import com.holary.mapper.CategoryMapper;
 import com.holary.mapper.DishMapper;
 import com.holary.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -13,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: Holary
@@ -27,6 +30,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private DishMapper dishMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * description: 查询分类
      *
@@ -34,9 +40,19 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Map<String, Object> list() {
-        List<Category> categoryList = categoryMapper.selectAll();
         HashMap<String, Object> map = new HashMap<>();
-
+        // 构造key
+        String key = "category";
+        List<Category> categoryList = (List<Category>) redisTemplate.opsForValue().get(key);
+        // 如果缓存中有数据直接返回
+        if (categoryList != null && !categoryList.isEmpty()) {
+            map.put("code", 200);
+            map.put("list", categoryList);
+            return map;
+        }
+        // 如果缓存中没有数据则查询数据库,并将数据放入缓存中
+        categoryList = categoryMapper.selectAll();
+        redisTemplate.opsForValue().set(key, categoryList, 30, TimeUnit.MINUTES);
         map.put("code", 200);
         map.put("list", categoryList);
         return map;
@@ -65,6 +81,8 @@ public class CategoryServiceImpl implements CategoryService {
             category.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
             category.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             categoryMapper.insert(category);
+            // 清理缓存
+            cleanCache("category");
             map.put("code", 200);
             map.put("message", "添加分类成功!");
         }
@@ -107,6 +125,8 @@ public class CategoryServiceImpl implements CategoryService {
         } else {
             category.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             categoryMapper.updateById(category);
+            // 清理缓存
+            cleanCache("category");
             map.put("code", 200);
             map.put("message", "修改分类成功!");
         }
@@ -130,6 +150,8 @@ public class CategoryServiceImpl implements CategoryService {
         } else {
             int i = categoryMapper.deleteById(id);
             if (i > 0) {
+                // 清理缓存
+                cleanCache("category");
                 map.put("code", 200);
                 map.put("message", "删除分类成功!");
             } else {
@@ -138,5 +160,16 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         return map;
+    }
+
+    /**
+     * description: 清理缓存中的数据
+     *
+     * @param pattern:
+     * @return: void
+     */
+    public void cleanCache(String pattern) {
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 }
