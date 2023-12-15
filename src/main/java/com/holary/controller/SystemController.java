@@ -150,4 +150,14 @@ public class SystemController {
     public String goUserOrderList() {
         return "user/order-list";
     }
+
+    /**
+     * description: 跳转修改密码页面
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goUpdatePassword")
+    public String goUpdatePassword() {
+        return "user/updatePassword";
+    }
 }

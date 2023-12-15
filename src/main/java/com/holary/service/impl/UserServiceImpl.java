@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.holary.entity.User;
 import com.holary.mapper.UserMapper;
 import com.holary.service.UserService;
+import com.holary.util.MD5Util;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -199,6 +201,59 @@ public class UserServiceImpl implements UserService {
             userMapper.updateById(user);
             map.put("code", 200);
             map.put("message", "修改个人信息成功!");
+        }
+        return map;
+    }
+
+    /**
+     * description: 用户修改密码
+     *
+     * @param oldPassword: 旧密码
+     * @param newPassword: 新密码
+     * @param rePassword:  确认密码
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    @Override
+    public Map<String, Object> updatePassword(String oldPassword, String newPassword, String rePassword) {
+        HashMap<String, Object> map = new HashMap<>();
+
+        // 获取当前用户id
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer userId = user.getId();
+        User user1 = userMapper.selectById(userId);
+        String oldPassword1 = user1.getPassword();
+
+        String oldPassword2 = MD5Util.md5(oldPassword, user1.getUsername());
+        String newPassword1 = MD5Util.md5(newPassword, user1.getUsername());
+
+        if (oldPassword.isEmpty()) {
+            map.put("code", -1);
+            map.put("message", "原密码为空");
+        } else if (newPassword.isEmpty()) {
+            map.put("code", -1);
+            map.put("message", "新密码为空");
+        } else if (rePassword.isEmpty()) {
+            map.put("code", -1);
+            map.put("message", "确认密码为空");
+        } else if (newPassword.length() < 5 || newPassword.length() > 16) {
+            map.put("code", -1);
+            map.put("message", "新密码长度错误(5-16位)");
+        } else if (!newPassword.equals(rePassword)) {
+            map.put("code", -1);
+            map.put("message", "两次密码输入不一致");
+        } else if (!oldPassword2.equals(oldPassword1)) {
+            map.put("code", -2);
+            map.put("message", "旧密码错误");
+        } else {
+            // 构造user对象
+            User user2 = new User();
+            user2.setId(userId);
+            user2.setPassword(newPassword1);
+            user2.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+            userMapper.updateById(user2);
+
+            map.put("code", 200);
+            map.put("message", "修改密码成功");
         }
         return map;
     }

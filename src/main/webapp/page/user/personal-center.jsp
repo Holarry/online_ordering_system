@@ -30,7 +30,7 @@
         <span>个人中心</span>
         <%--修改密码--%>
         <button class="layui-btn layui-btn-normal"
-                type="button" onclick="addDish()">修改密码
+                type="button" onclick="openUpdatePassword()">修改密码
         </button>
     </div>
     <hr>
@@ -135,6 +135,38 @@
                 }
             }, error: function () {
                 layer.msg("访问修改用户信息接口失败!")
+            }
+        });
+    }
+
+    // 打开修改密码弹窗
+    function openUpdatePassword() {
+        layer.open({
+            type: 2,
+            title: '修改密码',
+            area: ['500px', '300px'],
+            content: "../../sys/goUpdatePassword"
+        });
+    }
+
+    // addDishSuccessCallback 函数
+    function addDishSuccessCallback() {
+        // 关闭抽屉
+        layer.closeAll();
+        // 退出登录
+        logout();
+    }
+
+    // 退出登录
+    function logout() {
+        $.ajax({
+            url: "../../logout",
+            type: "POST",
+            success: function () {
+                window.parent.location.href = "../sys/goLogin";
+            },
+            error: function () {
+                layer.msg("退出登录失败");
             }
         });
     }

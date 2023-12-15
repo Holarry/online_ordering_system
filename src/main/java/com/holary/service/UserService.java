@@ -53,4 +53,14 @@ public interface UserService {
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     Map<String, Object> updatePersonalInfo(User user);
+
+    /**
+     * description: 用户修改密码
+     *
+     * @param oldPassword: 旧密码
+     * @param newPassword: 新密码
+     * @param rePassword:  确认密码
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     */
+    Map<String, Object> updatePassword(String oldPassword, String newPassword, String rePassword);
 }
