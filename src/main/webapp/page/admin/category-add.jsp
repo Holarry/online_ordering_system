@@ -74,7 +74,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问添加分类接口失败!", function () {
+                layer.msg("访问添加分类接口失败", function () {
                     location.reload();
                 });
             }

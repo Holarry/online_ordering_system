@@ -46,7 +46,7 @@ public class LoginServiceImpl implements LoginService {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             if (username.isEmpty() || password.isEmpty()) {
                 result.put("code", -1);
-                result.put("message", "用户名或密码为空!");
+                result.put("message", "用户名或密码为空");
                 return result;
             }
             try {
@@ -57,18 +57,18 @@ public class LoginServiceImpl implements LoginService {
                 return result;
             } catch (IncorrectCredentialsException e) {
                 result.put("code", -2);
-                result.put("message", "用户名或密码错误!");
+                result.put("message", "用户名或密码错误");
                 return result;
             } catch (AuthenticationException e) {
                 result.put("code", -3);
-                result.put("message", "认证失败!");
+                result.put("message", "认证失败");
                 return result;
             }
         }
         //从shiro提供的session对象中获取已经认证的用户
         User user = (User) subject.getSession().getAttribute("user");
         result.put("code", 200);
-        result.put("message", username + "认证成功!");
+        result.put("message", username + "认证成功");
         result.put("loginUser", user);
         return result;
     }
@@ -89,19 +89,19 @@ public class LoginServiceImpl implements LoginService {
         User user = userMapper.selectByUsername(username);
         if (username.isEmpty() || password.isEmpty() || rePassword.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "用户名或密码为空!");
+            map.put("message", "用户名或密码为空");
         } else if (username.length() < 4 || username.length() > 10) {
             map.put("code", -2);
-            map.put("message", "用户名长度错误(4-10位)!");
+            map.put("message", "用户名长度错误(4-10位)");
         } else if (password.length() < 5 || password.length() > 16) {
             map.put("code", -3);
-            map.put("message", "密码长度错误(5-16位)!");
+            map.put("message", "密码长度错误(5-16位)");
         } else if (!password.equals(rePassword)) {
             map.put("code", -4);
-            map.put("message", "两次密码输入不一致!");
+            map.put("message", "两次密码输入不一致");
         } else if (user != null) {
             map.put("code", -5);
-            map.put("message", "用户名" + username + "已存在!");
+            map.put("message", "用户名" + username + "已存在");
         } else {
             // 添加用户
             User newUser = new User();
@@ -116,7 +116,7 @@ public class LoginServiceImpl implements LoginService {
             userMapper.insertRole(userId, 2);
 
             map.put("code", 200);
-            map.put("message", "注册成功!");
+            map.put("message", "注册成功");
         }
         return map;
     }

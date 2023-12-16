@@ -86,7 +86,7 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!");
+                layer.msg("访问分类接口失败");
             }
         });
     }
@@ -109,10 +109,10 @@
                 if (data.code === 200) {
                     renderDishList(data.dishList);
                 } else {
-                    layer.msg("查询数据失败!", {icon: 2});
+                    layer.msg("查询数据失败", {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问菜品接口失败!");
+                layer.msg("访问菜品接口失败");
             }
         });
 
@@ -163,11 +163,11 @@
                         }
                     });
                 } else {
-                    layer.msg("获取购物车信息失败!", {icon: 2});
+                    layer.msg("获取购物车信息失败", {icon: 2});
                 }
             },
             error: function () {
-                layer.msg("访问购物车接口失败!");
+                layer.msg("访问购物车接口失败");
             }
         });
     }
@@ -208,7 +208,7 @@
                 }
             },
             error: function () {
-                layer.msg("访问加入购物车接口失败!", function () {
+                layer.msg("访问加入购物车接口失败", function () {
                     location.reload();
                 });
             }
@@ -259,7 +259,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问更新购物车接口失败!", function () {
+                layer.msg("访问更新购物车接口失败", function () {
                     location.reload();
                 });
             }

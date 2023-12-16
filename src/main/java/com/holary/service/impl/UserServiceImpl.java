@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
         if (user.getAge() != null) {
             if (user.getAge() < 0 || user.getAge() > 120) {
                 map.put("code", -1);
-                map.put("message", "年龄超出范围(0-120)!");
+                map.put("message", "年龄超出范围(0-120)");
                 return map;
             }
         }
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
         if (user1.getAge() != null) {
             if (user.getAge() == null) {
                 map.put("code", -2);
-                map.put("message", "年龄不能为空!");
+                map.put("message", "年龄不能为空");
                 return map;
             }
         }
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
             // 进行匹配并返回结果
             if (!matcher.matches()) {
                 map.put("code", -3);
-                map.put("message", "手机号格式错误!");
+                map.put("message", "手机号格式错误");
                 return map;
             }
         }
@@ -115,14 +115,14 @@ public class UserServiceImpl implements UserService {
         if (user1.getPhone() != null) {
             if (user.getPhone().isEmpty()) {
                 map.put("code", -4);
-                map.put("message", "手机号不能为空!");
+                map.put("message", "手机号不能为空");
                 return map;
             }
         }
 
         userMapper.updateById(user);
         map.put("code", 200);
-        map.put("message", "修改用户成功!");
+        map.put("message", "修改用户成功");
         return map;
     }
 
@@ -143,10 +143,10 @@ public class UserServiceImpl implements UserService {
         int j = userMapper.deleteByUserRoleId(userRoleId);
         if (i > 0 && j > 0) {
             map.put("code", 200);
-            map.put("message", "删除用户成功!");
+            map.put("message", "删除用户成功");
         } else {
             map.put("code", -1);
-            map.put("message", "删除用户失败!");
+            map.put("message", "删除用户失败");
         }
         return map;
     }
@@ -166,7 +166,7 @@ public class UserServiceImpl implements UserService {
 
         if (user.getPhone().isEmpty()) {
             map.put("code", -1);
-            map.put("message", "手机号码为空!");
+            map.put("message", "手机号码为空");
             return map;
         }
 
@@ -179,28 +179,28 @@ public class UserServiceImpl implements UserService {
 
         if (user.getUsername().isEmpty()) {
             map.put("code", -1);
-            map.put("message", "用户名为空!");
+            map.put("message", "用户名为空");
         } else if (user.getAge() == null) {
             map.put("code", -1);
-            map.put("message", "用户年龄为空!");
+            map.put("message", "用户年龄为空");
         } else if (user.getGender().isEmpty()) {
             map.put("code", -1);
-            map.put("message", "用户性别为空!");
+            map.put("message", "用户性别为空");
         } else if (user.getAge() < 0 || user.getAge() > 120) {
             map.put("code", -2);
-            map.put("message", "年龄超出范围(0-120)!");
+            map.put("message", "年龄超出范围(0-120)");
         } else if (!matcher.matches()) {
             map.put("code", -2);
-            map.put("message", "手机号格式错误!");
+            map.put("message", "手机号格式错误");
         } else if (user1 != null) {
             map.put("code", -2);
-            map.put("message", "用户名" + user.getUsername() + "已存在!");
+            map.put("message", "用户名" + user.getUsername() + "已存在");
         } else {
             // 填充更新时间
             user.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             userMapper.updateById(user);
             map.put("code", 200);
-            map.put("message", "修改个人信息成功!");
+            map.put("message", "修改个人信息成功");
         }
         return map;
     }

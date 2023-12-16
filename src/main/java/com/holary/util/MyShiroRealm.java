@@ -64,9 +64,9 @@ public class MyShiroRealm extends AuthorizingRealm {
         User user = loginMapper.selectUserByUsername(username);
         //判断用户是否存在
         if (user == null) {
-            throw new UnknownAccountException("用户名" + username + "不存在!");
+            throw new UnknownAccountException("用户名" + username + "不存在");
         } else if (user.getStatus() == 0) {
-            throw new UnknownAccountException("用户名" + username + "已被禁用!");
+            throw new UnknownAccountException("用户名" + username + "已被禁用");
         }
         //保存用户信息
         //获取shiro提供的当前会话对象

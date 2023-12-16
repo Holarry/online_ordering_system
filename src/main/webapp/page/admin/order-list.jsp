@@ -227,7 +227,7 @@
                     $("#tab").html('<tr><td colspan="10" align="center">没有订单数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问订单接口失败!");
+                layer.msg("访问订单接口失败");
             }
         });
     }

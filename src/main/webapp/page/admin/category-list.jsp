@@ -79,7 +79,7 @@
                     $("#tab").html('<tr><td colspan="6" align="center">没有分类数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问分类接口失败!");
+                layer.msg("访问分类接口失败");
             }
         });
     }
@@ -95,7 +95,7 @@
                 // 处理编辑操作
                 x_admin_show('编辑分类', '/admin/category/getDetailInfo?id=' + categoryId, 500, 281);
             }, error: function () {
-                layer.msg("获取分类信息失败!", function () {
+                layer.msg("获取分类信息失败", function () {
                     location.reload();
                 });
             }
@@ -124,7 +124,7 @@
                         layer.msg(data.message, {icon: 2});
                     }
                 }, error() {
-                    layer.msg("访问删除分类接口失败!", function () {
+                    layer.msg("访问删除分类接口失败", function () {
                         location.reload();
                     });
                 }

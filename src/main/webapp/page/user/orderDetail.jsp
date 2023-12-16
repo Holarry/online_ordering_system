@@ -131,7 +131,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问修改订单状态接口失败!", function () {
+                layer.msg("访问修改订单状态接口失败", function () {
                     location.reload();
                 });
             }

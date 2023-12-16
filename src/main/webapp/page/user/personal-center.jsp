@@ -134,7 +134,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问修改用户信息接口失败!")
+                layer.msg("访问修改用户信息接口失败")
             }
         });
     }

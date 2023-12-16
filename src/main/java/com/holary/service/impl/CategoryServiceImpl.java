@@ -70,13 +70,13 @@ public class CategoryServiceImpl implements CategoryService {
         HashMap<String, Object> map = new HashMap<>();
         if (category.getName().isEmpty() || category.getSort() == null) {
             map.put("code", -1);
-            map.put("message", "分类名称或排序为空!");
+            map.put("message", "分类名称或排序为空");
         } else if (category.getSort() < 0 || category.getSort() > 100) {
             map.put("code", -2);
-            map.put("message", "排序超出范围(0-100)!");
+            map.put("message", "排序超出范围(0-100)");
         } else if (category1 != null) {
             map.put("code", -3);
-            map.put("message", category.getName() + "分类已存在!");
+            map.put("message", category.getName() + "分类已存在");
         } else {
             category.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
             category.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
@@ -84,7 +84,7 @@ public class CategoryServiceImpl implements CategoryService {
             // 清理缓存
             cleanCache("category");
             map.put("code", 200);
-            map.put("message", "添加分类成功!");
+            map.put("message", "添加分类成功");
         }
         return map;
     }
@@ -115,20 +115,20 @@ public class CategoryServiceImpl implements CategoryService {
         HashMap<String, Object> map = new HashMap<>();
         if (category.getSort() == null || name.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "分类名称或排序为空!");
+            map.put("message", "分类名称或排序为空");
         } else if (category.getSort() < 0 || category.getSort() > 100) {
             map.put("code", -2);
-            map.put("message", "排序超出范围(0-100)!");
+            map.put("message", "排序超出范围(0-100)");
         } else if (category1 != null) {
             map.put("code", -3);
-            map.put("message", name + "分类已存在!");
+            map.put("message", name + "分类已存在");
         } else {
             category.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             categoryMapper.updateById(category);
             // 清理缓存
             cleanCache("category");
             map.put("code", 200);
-            map.put("message", "修改分类成功!");
+            map.put("message", "修改分类成功");
         }
         return map;
     }
@@ -146,17 +146,17 @@ public class CategoryServiceImpl implements CategoryService {
         List<Dish> dishList = dishMapper.selectByCategoryId(id);
         if (!dishList.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "该分类下关联有菜品,不能删除!");
+            map.put("message", "该分类下关联有菜品,不能删除");
         } else {
             int i = categoryMapper.deleteById(id);
             if (i > 0) {
                 // 清理缓存
                 cleanCache("category");
                 map.put("code", 200);
-                map.put("message", "删除分类成功!");
+                map.put("message", "删除分类成功");
             } else {
                 map.put("code", -2);
-                map.put("message", "删除分类失败!");
+                map.put("message", "删除分类失败");
             }
         }
         return map;

@@ -85,7 +85,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问注册接口失败!", function () {
+                layer.msg("访问注册接口失败", function () {
                     location.reload();
                 });
             }

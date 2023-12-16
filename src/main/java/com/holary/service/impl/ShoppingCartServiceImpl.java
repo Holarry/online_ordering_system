@@ -64,7 +64,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         ShoppingCart shoppingCart2 = shoppingCartMapper.selectByUserIdAndDishId(userId, shoppingCart.getDishId());
         map.put("code", 200);
-        map.put("message", "添加购物车成功!");
+        map.put("message", "添加购物车成功");
         map.put("shoppingCart", shoppingCart2);
         return map;
     }
@@ -115,20 +115,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         int number = shoppingCart.getNumber() + quantity;
         if (number < 0) {
             map.put("code", -1);
-            map.put("message", "菜品数量超出范围!");
+            map.put("message", "菜品数量超出范围");
         } else if (number == 0) {
             shoppingCartMapper.deleteByUserIdAndDishId(userId, dishId);
             ShoppingCart shoppingCart1 = new ShoppingCart();
             shoppingCart1.setNumber(-1);
             map.put("code", 200);
             map.put("shoppingCart", shoppingCart1);
-            map.put("message", "删除菜品成功!");
+            map.put("message", "删除菜品成功");
         } else {
             shoppingCart.setNumber(number);
             shoppingCartMapper.updateNumberById(shoppingCart);
             map.put("code", 200);
             map.put("shoppingCart", shoppingCart);
-            map.put("message", "修改菜品数量成功!");
+            map.put("message", "修改菜品数量成功");
         }
 
         // 清理缓存
@@ -182,7 +182,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         cleanCache(key);
 
         map.put("code", 200);
-        map.put("message", "删除菜品成功!");
+        map.put("message", "删除菜品成功");
         return map;
     }
 
@@ -204,7 +204,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         cleanCache(key);
 
         map.put("code", 200);
-        map.put("message", "清空购物车成功!");
+        map.put("message", "清空购物车成功");
         return map;
     }
 

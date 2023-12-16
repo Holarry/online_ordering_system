@@ -209,7 +209,7 @@
                     $("#tab").html('<tr><td colspan="10" align="center">没有菜品数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问菜品接口失败!");
+                layer.msg("访问菜品接口失败");
             }
         });
     }
@@ -248,7 +248,7 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!");
+                layer.msg("访问分类接口失败");
             }
         });
     }
@@ -311,7 +311,7 @@
                         layer.msg(data.message, {icon: 2});
                     }
                 }, error() {
-                    layer.msg("访问删除菜品接口失败!", function () {
+                    layer.msg("访问删除菜品接口失败", function () {
                         location.reload();
                     });
                 }

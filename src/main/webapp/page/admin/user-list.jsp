@@ -211,7 +211,7 @@
                     $("#tab").html('<tr><td colspan="9" align="center">没有用户数据</td></tr>');
                 }
             }, error: function () {
-                layer.msg("访问用户接口失败!");
+                layer.msg("访问用户接口失败");
             }
         });
     }
@@ -243,7 +243,7 @@
                 // 处理编辑操作
                 x_admin_show('编辑用户', '/admin/user/getDetailInfo?id=' + userId, 500, 455);
             }, error: function () {
-                layer.msg("获取用户信息失败!", function () {
+                layer.msg("获取用户信息失败", function () {
                     location.reload();
                 });
             }
@@ -272,7 +272,7 @@
                         layer.msg(data.message, {icon: 2});
                     }
                 }, error() {
-                    layer.msg("访问删除用户接口失败!", function () {
+                    layer.msg("访问删除用户接口失败", function () {
                         location.reload();
                     });
                 }

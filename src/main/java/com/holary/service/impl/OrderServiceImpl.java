@@ -60,22 +60,22 @@ public class OrderServiceImpl implements OrderService {
         // 校验参数是否异常
         if (shoppingCartList == null || shoppingCartList.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "购物车为空,不能提交订单!");
+            map.put("message", "购物车为空,不能提交订单");
             return map;
         }
         if (order.getConsignee().isEmpty()) {
             map.put("code", -2);
-            map.put("message", "收货人为空!");
+            map.put("message", "收货人为空");
             return map;
         }
         if (order.getConsigneePhone().isEmpty()) {
             map.put("code", -3);
-            map.put("message", "手机号为空!");
+            map.put("message", "手机号为空");
             return map;
         }
         if (order.getAddress().isEmpty()) {
             map.put("code", -4);
-            map.put("message", "收货地址为空!");
+            map.put("message", "收货地址为空");
             return map;
         }
 
@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
         // 进行匹配并返回结果
         if (!matcher.matches()) {
             map.put("code", -5);
-            map.put("message", "手机号格式错误!");
+            map.put("message", "手机号格式错误");
             return map;
         }
 
@@ -141,7 +141,7 @@ public class OrderServiceImpl implements OrderService {
         shoppingCartMapper.deleteByUserId(userId);
 
         map.put("code", 200);
-        map.put("message", "提交订单成功!");
+        map.put("message", "提交订单成功");
         return map;
     }
 
@@ -192,7 +192,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.selectByOrderNumber(orderNumber);
         if (order == null) {
             map.put("code", -1);
-            map.put("message", "订单号不存在!");
+            map.put("message", "订单号不存在");
             return map;
         }
         // 修改订单状态
@@ -200,15 +200,15 @@ public class OrderServiceImpl implements OrderService {
             // 派送订单
             orderMapper.updateByOrderNumber(orderNumber, 2);
             map.put("code", 200);
-            map.put("message", "订单派送中!");
+            map.put("message", "订单派送中");
         } else if (status == 3) {
             // 完成订单
             orderMapper.updateByOrderNumber(orderNumber, 4);
             map.put("code", 200);
-            map.put("message", "订单已完成!");
+            map.put("message", "订单已完成");
         } else {
             map.put("code", -2);
-            map.put("message", "订单状态错误!");
+            map.put("message", "订单状态错误");
         }
         return map;
     }
@@ -263,7 +263,7 @@ public class OrderServiceImpl implements OrderService {
         // 判断订单是否存在
         if (orderList == null || orderList.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "订单号不存在!");
+            map.put("message", "订单号不存在");
             return map;
         }
         // 修改订单状态
@@ -271,15 +271,15 @@ public class OrderServiceImpl implements OrderService {
             // 取消订单
             orderMapper.updateByOrderNumber(orderNumber, 0);
             map.put("code", 200);
-            map.put("message", "取消订单成功!");
+            map.put("message", "取消订单成功");
         } else if (status == 2) {
             // 确认订单
             orderMapper.updateByOrderNumber(orderNumber, 3);
             map.put("code", 200);
-            map.put("message", "确认订单成功!");
+            map.put("message", "确认订单成功");
         } else {
             map.put("code", -2);
-            map.put("message", "订单状态错误!");
+            map.put("message", "订单状态错误");
         }
         return map;
     }

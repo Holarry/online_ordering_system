@@ -106,7 +106,7 @@
                     }
                 }
             }, error: function () {
-                layer.msg("访问购物车接口失败!");
+                layer.msg("访问购物车接口失败");
             }
         });
     }
@@ -137,7 +137,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问更新购物车接口失败!", function () {
+                layer.msg("访问更新购物车接口失败", function () {
                     location.reload();
                 });
             }
@@ -156,7 +156,7 @@
                     $("#totalAmount").text("总计: " + data.totalAmount.toFixed(2) + "元");
                 }
             }, error: function () {
-                layer.msg("访问计算总金额接口失败!");
+                layer.msg("访问计算总金额接口失败");
             }
         });
     }
@@ -176,7 +176,7 @@
                     });
                 }
             }, error: function () {
-                layer.msg("访问删除购物车菜品接口失败!", function () {
+                layer.msg("访问删除购物车菜品接口失败", function () {
                     location.reload();
                 });
             }
@@ -209,12 +209,12 @@
             data: {},
             success: function (data) {
                 if (data.code === 200) {
-                    layer.msg("清空购物车成功!", {icon: 1, time: 1000}, function () {
+                    layer.msg("清空购物车成功", {icon: 1, time: 1000}, function () {
                         location.reload();
                     });
                 }
             }, error: function () {
-                layer.msg("访问清空购物车接口失败!", function () {
+                layer.msg("访问清空购物车接口失败", function () {
                     location.reload();
                 });
             }

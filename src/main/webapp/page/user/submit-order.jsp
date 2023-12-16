@@ -99,7 +99,7 @@
                     $("#totalAmount").text("总计: " + data.totalAmount.toFixed(2) + "元");
                 }
             }, error: function () {
-                layer.msg("访问计算总金额接口失败!");
+                layer.msg("访问计算总金额接口失败");
             }
         });
     }
@@ -116,7 +116,7 @@
                     shoppingCartList = data.shoppingCartList;
                 }
             }, error: function () {
-                layer.msg("访问购物车接口失败!");
+                layer.msg("访问购物车接口失败");
             }
         });
     }
@@ -154,7 +154,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg("访问提交订单接口失败!", function () {
+                layer.msg("访问提交订单接口失败", function () {
                     location.reload();
                 });
             }

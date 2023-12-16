@@ -134,7 +134,7 @@
                 // 刷新select渲染
                 layui.form.render('select');
             }, error: function () {
-                layer.msg("访问分类接口失败!");
+                layer.msg("访问分类接口失败");
             }
         });
     }
@@ -201,7 +201,7 @@
                     layer.msg(data.message, {icon: 2});
                 }
             }, error: function () {
-                layer.msg('访问修改菜品接口失败!', function () {
+                layer.msg('访问修改菜品接口失败', function () {
                     location.reload();
                 });
             }

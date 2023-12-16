@@ -30,7 +30,8 @@
             <label for="oldPassword" class="form-item-label-d" style="width: 100px">原密码</label>
             <div class="form-item-content-d">
                 <div class="form-input-d">
-                    <input id="oldPassword" name="oldPassword" class="form-input-inner-d" type="text" autocomplete="off"
+                    <input id="oldPassword" name="oldPassword" class="form-input-inner-d" type="password"
+                           autocomplete="off"
                            placeholder="请输入原密码">
                 </div>
             </div>
@@ -40,7 +41,8 @@
             <label for="newPassword" class="form-item-label-d" style="width: 100px">新密码</label>
             <div class="form-item-content-d">
                 <div class="form-input-d">
-                    <input id="newPassword" name="newPassword" class="form-input-inner-d" type="text" autocomplete="off"
+                    <input id="newPassword" name="newPassword" class="form-input-inner-d" type="password"
+                           autocomplete="off"
                            placeholder="请输入新密码">
                 </div>
             </div>
@@ -50,7 +52,8 @@
             <label for="rePassword" class="form-item-label-d" style="width: 100px">确认密码</label>
             <div class="form-item-content-d">
                 <div class="form-input-d">
-                    <input id="rePassword" name="rePassword" class="form-input-inner-d" type="text" autocomplete="off"
+                    <input id="rePassword" name="rePassword" class="form-input-inner-d" type="password"
+                           autocomplete="off"
                            placeholder="请输入确认新密码">
                 </div>
             </div>

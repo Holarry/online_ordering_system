@@ -68,16 +68,16 @@ public class DishServiceImpl implements DishService {
         Dish dish1 = dishMapper.selectByName(name);
         if (name.isEmpty()) {
             map.put("code", -1);
-            map.put("message", "菜品名称为空!");
+            map.put("message", "菜品名称为空");
         } else if (dish.getCategoryId() == null) {
             map.put("code", -2);
-            map.put("message", "菜品分类为空!");
+            map.put("message", "菜品分类为空");
         } else if (dish.getPrice() == null) {
             map.put("code", -3);
-            map.put("message", "菜品价格为空!");
+            map.put("message", "菜品价格为空");
         } else if (dish1 != null) {
             map.put("code", -4);
-            map.put("message", name + "菜品已存在!");
+            map.put("message", name + "菜品已存在");
         } else {
             dish.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
             dish.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
@@ -85,7 +85,7 @@ public class DishServiceImpl implements DishService {
             // 清理缓存
             cleanCache("dish_*");
             map.put("code", 200);
-            map.put("message", "添加菜品成功!");
+            map.put("message", "添加菜品成功");
         }
         return map;
     }
@@ -113,23 +113,23 @@ public class DishServiceImpl implements DishService {
         Dish dish1 = dishMapper.selectByIdAndName(dish.getId(), dish.getName());
         if (dish.getName().isEmpty()) {
             map.put("code", -1);
-            map.put("message", "菜品名称为空!");
+            map.put("message", "菜品名称为空");
         } else if (dish.getCategoryId() == null) {
             map.put("code", -2);
-            map.put("message", "菜品分类为空!");
+            map.put("message", "菜品分类为空");
         } else if (dish.getPrice() == null) {
             map.put("code", -3);
-            map.put("message", "菜品价格为空!");
+            map.put("message", "菜品价格为空");
         } else if (dish1 != null) {
             map.put("code", -4);
-            map.put("message", dish.getName() + "菜品已存在!");
+            map.put("message", dish.getName() + "菜品已存在");
         } else {
             dish.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
             dishMapper.updateById(dish);
             // 清理缓存
             cleanCache("dish_*");
             map.put("code", 200);
-            map.put("message", "修改菜品成功!");
+            map.put("message", "修改菜品成功");
         }
         return map;
     }
@@ -148,17 +148,17 @@ public class DishServiceImpl implements DishService {
         Integer status = dish.getStatus();
         if (status == 1) {
             map.put("code", -1);
-            map.put("message", "该菜品处于上架状态,不能删除!");
+            map.put("message", "该菜品处于上架状态,不能删除");
         } else {
             int i = dishMapper.deleteById(id);
             if (i > 0) {
                 // 清理缓存
                 cleanCache("dish_*");
                 map.put("code", 200);
-                map.put("message", "删除菜品成功!");
+                map.put("message", "删除菜品成功");
             } else {
                 map.put("code", -2);
-                map.put("message", "删除菜品失败!");
+                map.put("message", "删除菜品失败");
             }
         }
         return map;
