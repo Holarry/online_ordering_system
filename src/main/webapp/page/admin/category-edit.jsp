@@ -67,7 +67,7 @@
 
         $.ajax({
             url: "/admin/category/update",
-            type: "POST",
+            type: "PUT",
             dataType: "JSON",
             data: JSON.stringify(category),
             contentType: 'application/json;charset=utf-8',

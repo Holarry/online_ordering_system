@@ -241,12 +241,12 @@
     function updateDishNumber(dishId, quantity) {
         $.ajax({
             url: "/user/shoppingCart/updateNumber",
-            method: "POST",
-            dataType: "JSON",
-            data: {
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
                 dishId: dishId,
                 quantity: quantity
-            }, success: function (data) {
+            }), success: function (data) {
                 if (data.code === 200) {
                     // 更新成功后，重新获取购物车信息并更新显示
                     if (data.shoppingCart.number > 0) {

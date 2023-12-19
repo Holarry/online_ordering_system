@@ -13,6 +13,7 @@ import com.holary.mapper.ShoppingCartMapper;
 import com.holary.service.OrderService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +42,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDetailMapper orderDetailMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * description: 提交订单
@@ -139,6 +143,9 @@ public class OrderServiceImpl implements OrderService {
 
         // 清空购物车
         shoppingCartMapper.deleteByUserId(userId);
+        // 构造key
+        String key = "shoppingCart_" + userId;
+        redisTemplate.delete(key);
 
         map.put("code", 200);
         map.put("message", "提交订单成功");

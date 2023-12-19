@@ -188,7 +188,7 @@
 
         $.ajax({
             url: "/admin/dish/update",
-            type: "POST",
+            type: "PUT",
             dataType: "JSON",
             data: JSON.stringify(dish),
             contentType: 'application/json;charset=utf-8',

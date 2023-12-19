@@ -113,6 +113,7 @@
                 url: "/admin/category/delete",
                 type: "POST",
                 data: {
+                    _method: "DELETE",
                     id: categoryId
                 }, success: function (data) {
                     if (data.code === 200) {

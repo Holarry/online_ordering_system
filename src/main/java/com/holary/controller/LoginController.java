@@ -5,10 +5,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -54,7 +51,7 @@ public class LoginController {
      * @param rePassword: 确认密码
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     @ResponseBody
     public Map<String, Object> register(String username, String password, String rePassword) {
         return loginService.register(username, password, rePassword);
@@ -65,7 +62,7 @@ public class LoginController {
      *
      * @return: java.lang.String
      */
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout() {
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {

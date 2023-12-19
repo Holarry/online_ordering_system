@@ -174,7 +174,7 @@
         $.ajax({
             url: "../admin/order/list",
             dataType: "JSON",
-            type: "POST",
+            type: "GET",
             async: false,
             data: {
                 pageNum: number,

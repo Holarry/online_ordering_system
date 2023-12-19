@@ -6,9 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -29,7 +27,7 @@ public class UserController {
      * @param model: Model
      * @return: java.lang.String
      */
-    @RequestMapping("/getDetailInfo")
+    @GetMapping("/getDetailInfo")
     public String getDetailInfo(Model model) {
         // 获取当前用户id
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
@@ -45,7 +43,7 @@ public class UserController {
      * @param user: user对象
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     @ResponseBody
     public Map<String, Object> update(@RequestBody User user) {
         return userService.updatePersonalInfo(user);
@@ -54,14 +52,15 @@ public class UserController {
     /**
      * description: 用户修改密码
      *
-     * @param oldPassword: 旧密码
-     * @param newPassword: 新密码
-     * @param rePassword:  确认密码
+     * @param requestBody: requestBody
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/updatePassword")
+    @PutMapping("/updatePassword")
     @ResponseBody
-    public Map<String, Object> updatePassword(String oldPassword, String newPassword, String rePassword) {
+    public Map<String, Object> updatePassword(@RequestBody Map<String, Object> requestBody) {
+        String oldPassword = String.valueOf(requestBody.get("oldPassword")); // 旧密码
+        String newPassword = String.valueOf(requestBody.get("newPassword")); // 新密码
+        String rePassword = String.valueOf(requestBody.get("rePassword")); // 确认密码
         return userService.updatePassword(oldPassword, newPassword, rePassword);
     }
 }

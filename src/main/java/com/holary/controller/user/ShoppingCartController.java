@@ -4,9 +4,7 @@ import com.holary.entity.ShoppingCart;
 import com.holary.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -27,7 +25,7 @@ public class ShoppingCartController {
      * @param shoppingCart: shoppingCart对象
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/addShoppingCart")
+    @PostMapping("/addShoppingCart")
     @ResponseBody
     public Map<String, Object> addShoppingCart(@RequestBody ShoppingCart shoppingCart) {
         return shoppingCartService.addShoppingCart(shoppingCart);
@@ -38,7 +36,7 @@ public class ShoppingCartController {
      *
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public Map<String, Object> list() {
         return shoppingCartService.list();
@@ -47,13 +45,14 @@ public class ShoppingCartController {
     /**
      * description: 根据用户id和菜品id修改购物车中的菜品数量
      *
-     * @param dishId:   菜品id
-     * @param quantity: 数量(1或-1)
+     * @param requestBody: requestBody
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/updateNumber")
+    @PutMapping("/updateNumber")
     @ResponseBody
-    public Map<String, Object> updateNumber(Integer dishId, Integer quantity) {
+    public Map<String, Object> updateNumber(@RequestBody Map<String, Object> requestBody) {
+        Integer dishId = (Integer) requestBody.get("dishId"); // 菜品id
+        Integer quantity = (Integer) requestBody.get("quantity"); // 数量(1或-1)
         return shoppingCartService.updateNumber(dishId, quantity);
     }
 
@@ -62,7 +61,7 @@ public class ShoppingCartController {
      *
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/calculateTotalAmount")
+    @GetMapping("/calculateTotalAmount")
     @ResponseBody
     public Map<String, Object> calculateTotalAmount() {
         return shoppingCartService.calculateTotalAmount();
@@ -74,7 +73,7 @@ public class ShoppingCartController {
      * @param dishId: 菜品id
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/deleteShoppingCartDish")
+    @DeleteMapping("/deleteShoppingCartDish")
     @ResponseBody
     public Map<String, Object> deleteShoppingCartDish(Integer dishId) {
         return shoppingCartService.deleteShoppingCartDish(dishId);
@@ -85,7 +84,7 @@ public class ShoppingCartController {
      *
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/clearShoppingCart")
+    @DeleteMapping("/clearShoppingCart")
     @ResponseBody
     public Map<String, Object> clearShoppingCart() {
         return shoppingCartService.clearShoppingCart();

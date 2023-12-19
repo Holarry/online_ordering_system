@@ -3,6 +3,7 @@ package com.holary.controller.user;
 import com.holary.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +27,7 @@ public class DishController {
      * @param categoryId: 菜品分类
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public Map<String, Object> list(String name, Integer categoryId) {
         return dishService.list1(name, categoryId);

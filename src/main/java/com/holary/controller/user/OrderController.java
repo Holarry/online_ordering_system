@@ -6,9 +6,7 @@ import com.holary.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +28,7 @@ public class OrderController {
      * @param order: order对象
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/submitOrder")
+    @PostMapping("/submitOrder")
     @ResponseBody
     public Map<String, Object> submitOrder(@RequestBody Order order) {
         return orderService.submitOrder(order);
@@ -43,7 +41,7 @@ public class OrderController {
      * @param status:      订单状态
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public Map<String, Object> list(String orderNumber, Integer status) {
         return orderService.list1(orderNumber, status);
@@ -56,7 +54,7 @@ public class OrderController {
      * @param model:       Model
      * @return: java.lang.String
      */
-    @RequestMapping("/getOrderDetail")
+    @GetMapping("/getOrderDetail")
     public String getOrderDetail(String orderNumber, Model model) {
         List<OrderDetailDto> orderDetailList = orderService.getOrderDetailByUserId(orderNumber);
         model.addAttribute("orderDetailList", orderDetailList);
@@ -66,13 +64,14 @@ public class OrderController {
     /**
      * description: 用户修改订单状态(取消订单, 确认订单)
      *
-     * @param orderNumber: 订单号
-     * @param status:      订单状态
+     * @param requestBody: requestBody
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
     @RequestMapping("/updateOrderStatus")
     @ResponseBody
-    public Map<String, Object> updateOrderStatus(String orderNumber, Integer status) {
+    public Map<String, Object> updateOrderStatus(@RequestBody Map<String, Object> requestBody) {
+        String orderNumber = String.valueOf(requestBody.get("orderNumber")); // 订单号
+        Integer status = (Integer) requestBody.get("status"); // 订单状态
         return orderService.updateOrderStatusByUserId(orderNumber, status);
     }
 }

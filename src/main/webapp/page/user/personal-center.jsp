@@ -121,7 +121,7 @@
 
         $.ajax({
             url: "../../user/user/update",
-            type: "POST",
+            type: "PUT",
             dataType: "JSON",
             data: JSON.stringify(user),
             contentType: 'application/json;charset=utf-8',
@@ -161,7 +161,7 @@
     function logout() {
         $.ajax({
             url: "../../logout",
-            type: "POST",
+            type: "GET",
             success: function () {
                 window.parent.location.href = "../sys/goLogin";
             },

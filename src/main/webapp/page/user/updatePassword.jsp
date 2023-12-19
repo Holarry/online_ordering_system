@@ -69,13 +69,13 @@
     function updatePassword() {
         $.ajax({
             url: "../../user/user/updatePassword",
-            type: "POST",
-            dataType: "JSON",
-            data: {
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
                 oldPassword: $('#oldPassword').val(),
                 newPassword: $('#newPassword').val(),
                 rePassword: $('#rePassword').val()
-            }, success: function (data) {
+            }), success: function (data) {
                 if (data.code === 200) {
                     layer.msg("修改密码成功,请重新登录", {icon: 1, time: 1500}, function () {
                         notifyParentPage();

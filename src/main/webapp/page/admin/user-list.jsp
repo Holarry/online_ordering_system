@@ -162,7 +162,7 @@
         $.ajax({
             url: "../admin/user/list",
             dataType: "JSON",
-            type: "POST",
+            type: "GET",
             async: false,
             data: {
                 pageNum: number,
@@ -261,6 +261,7 @@
                 url: "/admin/user/delete",
                 type: "POST",
                 data: {
+                    _method: "DELETE",
                     id: userId
                 }, success: function (data) {
                     if (data.code === 200) {

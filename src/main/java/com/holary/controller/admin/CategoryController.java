@@ -5,9 +5,7 @@ import com.holary.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -27,7 +25,7 @@ public class CategoryController {
      *
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public Map<String, Object> list() {
         return categoryService.list();
@@ -39,7 +37,7 @@ public class CategoryController {
      * @param category: category对象
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     @ResponseBody
     public Map<String, Object> save(@RequestBody Category category) {
         return categoryService.save(category);
@@ -52,7 +50,7 @@ public class CategoryController {
      * @param model: model
      * @return: java.lang.String
      */
-    @RequestMapping("/getDetailInfo")
+    @GetMapping("/getDetailInfo")
     public String getDetailInfo(Integer id, Model model) {
         Category category = categoryService.getDetailInfo(id);
         model.addAttribute("category", category);
@@ -65,7 +63,7 @@ public class CategoryController {
      * @param category: category对象
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     @ResponseBody
     public Map<String, Object> update(@RequestBody Category category) {
         return categoryService.update(category);
@@ -77,7 +75,7 @@ public class CategoryController {
      * @param id: 分类id
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     @ResponseBody
     public Map<String, Object> delete(Integer id) {
         return categoryService.delete(id);

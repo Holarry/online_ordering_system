@@ -120,7 +120,7 @@
         $.ajax({
             url: '/admin/user/update',
             data: JSON.stringify(user),
-            type: 'POST',
+            type: 'PUT',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 if (data.code === 200) {
@@ -133,7 +133,7 @@
             }, error() {
                 layer.msg("访问修改用户接口失败", function () {
                     location.reload();
-                })
+                });
             }
         });
     }

@@ -5,9 +5,7 @@ import com.holary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -32,7 +30,7 @@ public class UserController {
      * @param status:   状态
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public Map<String, Object> list(int pageNum, int pageSize, String username, String gender, Integer status) {
         return userService.list(pageNum, pageSize, username, gender, status);
@@ -45,7 +43,7 @@ public class UserController {
      * @param model: Model
      * @return: java.lang.String
      */
-    @RequestMapping("/getDetailInfo")
+    @GetMapping("/getDetailInfo")
     public String getDetailInfo(Integer id, Model model) {
         User user = userService.getDetailInfo(id);
         model.addAttribute("user", user);
@@ -58,7 +56,7 @@ public class UserController {
      * @param user: user对象
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     @ResponseBody
     public Map<String, Object> update(@RequestBody User user) {
         return userService.update(user);
@@ -70,7 +68,7 @@ public class UserController {
      * @param id: 用户id
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     @ResponseBody
     public Map<String, Object> delete(Integer id) {
         return userService.delete(id);

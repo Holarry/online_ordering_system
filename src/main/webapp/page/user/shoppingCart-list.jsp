@@ -125,12 +125,12 @@
     function updateDishNumber(dishId, quantity) {
         $.ajax({
             url: "/user/shoppingCart/updateNumber",
-            method: "POST",
-            dataType: "JSON",
-            data: {
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
                 dishId: dishId,
                 quantity: quantity
-            }, success: function (data) {
+            }), success: function (data) {
                 if (data.code === 200) {
                     selectShoppingCart();
                 } else {
@@ -168,6 +168,7 @@
             type: "POST",
             dataType: "JSON",
             data: {
+                _method: "DELETE",
                 dishId: dishId
             }, success: function (data) {
                 if (data.code === 200) {
@@ -206,7 +207,9 @@
             url: "../user/shoppingCart/clearShoppingCart",
             type: "POST",
             dataType: "JSON",
-            data: {},
+            data: {
+                _method: "DELETE"
+            },
             success: function (data) {
                 if (data.code === 200) {
                     layer.msg("清空购物车成功", {icon: 1, time: 1000}, function () {

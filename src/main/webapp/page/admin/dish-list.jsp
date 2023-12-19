@@ -158,7 +158,7 @@
         $.ajax({
             url: "../admin/dish/list",
             dataType: "JSON",
-            type: "POST",
+            type: "GET",
             async: false,
             data: {
                 pageNum: number,
@@ -300,6 +300,7 @@
                 url: "/admin/dish/delete",
                 type: "POST",
                 data: {
+                    _method: "DELETE",
                     id: dishId
                 }, success: function (data) {
                     if (data.code === 200) {

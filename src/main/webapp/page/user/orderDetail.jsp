@@ -117,12 +117,12 @@
     function doUpdateOrderStatus(orderNumber, status) {
         $.ajax({
             url: "../../user/order/updateOrderStatus",
-            type: "POST",
-            dataType: "JSON",
-            data: {
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
                 orderNumber: orderNumber,
                 status: status
-            }, success: function (data) {
+            }), success: function (data) {
                 if (data.code === 200) {
                     layer.msg(data.message, {icon: 1, time: 1000}, function () {
                         notifyParentPage();
