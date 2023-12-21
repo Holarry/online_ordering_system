@@ -9,10 +9,10 @@
 ## 功能一览
 
 (1) 登录
-![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312202309033.png)
+![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312202309020.png)
 
 (2)注册
-![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312202328191.png)
+![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312202309028.png)
 
 (3)管理员端用户管理
 ![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312202347207.png)
@@ -42,4 +42,4 @@
 ![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312210320281.png)
 
 (12)用户端个人中心
-![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312202350695.png)
+![image](https://online-ordering-1320152118.cos.ap-chengdu.myqcloud.com/readme/202312212350695.png)
