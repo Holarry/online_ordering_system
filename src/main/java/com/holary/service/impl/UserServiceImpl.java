@@ -180,6 +180,9 @@ public class UserServiceImpl implements UserService {
         if (user.getUsername().isEmpty()) {
             map.put("code", -1);
             map.put("message", "用户名为空");
+        } else if (user.getUsername().length() < 4 || user.getUsername().length() > 10) {
+            map.put("code", -1);
+            map.put("message", "用户名长度错误(4-10位)");
         } else if (user.getAge() == null) {
             map.put("code", -1);
             map.put("message", "用户年龄为空");

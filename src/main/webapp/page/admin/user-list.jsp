@@ -28,11 +28,6 @@
 <div class="x-body">
     <div class="header-d">
         <span>用户管理</span>
-        <%--添加用户--%>
-        <button class="layui-btn layui-btn-normal"
-                onclick="x_admin_show('添加用户','../sys/goUserAdd',500,450)">
-            <i class="layui-icon layui-icon-add-1"></i>添加
-        </button>
     </div>
     <hr>
     <div class="layui-row">

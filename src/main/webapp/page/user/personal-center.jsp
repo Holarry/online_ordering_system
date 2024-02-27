@@ -41,7 +41,7 @@
                 <div class="form-item-content-d">
                     <div class="form-input-d">
                         <input id="username" name="username" class="form-input-inner-d" type="text" autocomplete="off"
-                               value="${user.username}" placeholder="请输入用户名">
+                               value="${user.username}" placeholder="请输入用户名" disabled>
                     </div>
                 </div>
             </div>
