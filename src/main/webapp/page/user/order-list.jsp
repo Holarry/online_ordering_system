@@ -63,12 +63,12 @@
         <thead>
         <tr>
             <th>订单号</th>
+            <th>订单类型</th>
+            <th>桌号</th>
             <th>收货人</th>
             <th>手机号</th>
             <th>地址</th>
             <th>金额</th>
-            <th>备注</th>
-            <th>订单状态</th>
             <th style="width: 240px">订单时间</th>
             <th>操作</th>
         </tr>
@@ -112,7 +112,7 @@
                     if (orderList.length > 0) {
                         let str = '';
                         for (let i = 0; i < orderList.length; i++) {
-                            let status;
+                            /*let status;
                             if (orderList[i].status === 0) {
                                 status = '已取消';
                             } else if (orderList[i].status === 1) {
@@ -123,15 +123,47 @@
                                 status = '已确认';
                             } else if (orderList[i].status === 4) {
                                 status = '已完成';
+                            }*/
+                            let orderType = '';
+                            let tableNumber = '';
+                            let consignee = '';
+                            let consigneePhone = '';
+                            let address = '';
+                            if (orderList[i].orderType === 0) {
+                                orderType = '外卖';
+                            } else if (orderList[i].orderType === 1) {
+                                orderType = '堂食';
+                            } else {
+                                orderType = '类型错误';
+                            }
+                            if (orderList[i].tableNumber == null) {
+                                tableNumber = '无';
+                            } else {
+                                tableNumber = orderList[i].tableNumber;
+                            }
+                            if (orderList[i].consignee === '') {
+                                consignee = '无';
+                            } else {
+                                consignee = orderList[i].consignee;
+                            }
+                            if (orderList[i].consigneePhone === '') {
+                                consigneePhone = '无';
+                            } else {
+                                consigneePhone = orderList[i].consigneePhone;
+                            }
+                            if (orderList[i].address === '') {
+                                address = '无';
+                            } else {
+                                address = orderList[i].address;
                             }
                             str += '<tr>' +
                                 '<td>' + orderList[i].orderNumber + '</td>' +
-                                '<td>' + orderList[i].consignee + '</td>' +
-                                '<td>' + orderList[i].consigneePhone + '</td>' +
-                                '<td>' + orderList[i].address + '</td>' +
+                                '<td>' + orderType + '</td>' +
+                                '<td>' + tableNumber + '</td>' +
+                                '<td>' + consignee + '</td>' +
+                                '<td>' + consigneePhone + '</td>' +
+                                '<td>' + address + '</td>' +
                                 '<td>' + orderList[i].amount + '元' + '</td>' +
-                                '<td>' + orderList[i].remark + '</td>' +
-                                '<td>' + status + '</td>' +
                                 '<td>' + orderList[i].orderTime + '</td>' +
                                 '<td class="td-manage">' +
                                 '<button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="orderDetail(' + orderList[i].orderNumber + ')">更多</button>' +

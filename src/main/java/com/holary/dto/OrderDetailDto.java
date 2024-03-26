@@ -37,6 +37,8 @@ public class OrderDetailDto {
     private String username;
     //订单状态
     private Integer status;
+    //备注
+    private String remark;
     //订单时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date orderTime;

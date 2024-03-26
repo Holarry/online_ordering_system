@@ -22,49 +22,109 @@
     <script type="text/javascript" src="../../static/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../static/lib/layui-2.8.18/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+    <style>
+        /* 自定义按钮样式 */
+        .switch-buttons {
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+
+        .switch-buttons button {
+            margin-right: 2px;
+        }
+
+        /* 标签页样式 */
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div class="body-d">
     <form class="form-d">
-        <div class="form-item-d">
-            <label for="consignee" class="form-item-label-d" style="width: 100px">收货人</label>
-            <div class="form-item-content-d">
-                <div class="form-input-d">
-                    <input id="consignee" name="consignee" class="form-input-inner-d" type="text" autocomplete="off"
-                           placeholder="请输入收货人">
+        <!-- 左上角的切换按钮 -->
+        <div class="switch-buttons">
+            <button class="layui-btn layui-btn-warm layui-btn-radius" onclick="switchTab('takeaway')"
+                    data-tab="takeaway">外卖
+            </button>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="switchTab('dinein')"
+                    data-tab="dinein">堂食
+            </button>
+        </div>
+        <!-- 外卖标签页 -->
+        <div class="tab active" id="takeaway" style="margin-top: 25px">
+            <div class="form-item-d">
+                <label for="consignee" class="form-item-label-d" style="width: 100px">收货人</label>
+                <div class="form-item-content-d">
+                    <div class="form-input-d">
+                        <input id="consignee" name="consignee" class="form-input-inner-d" type="text" autocomplete="off"
+                               placeholder="请输入收货人">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-item-d">
-            <label for="phone" class="form-item-label-d" style="width: 100px">手机号</label>
-            <div class="form-item-content-d">
-                <div class="form-input-d">
-                    <input id="phone" name="phone" class="form-input-inner-d" type="text" autocomplete="off"
-                           placeholder="请输入手机号">
+            <div class="form-item-d">
+                <label for="phone" class="form-item-label-d" style="width: 100px">手机号</label>
+                <div class="form-item-content-d">
+                    <div class="form-input-d">
+                        <input id="phone" name="phone" class="form-input-inner-d" type="text" autocomplete="off"
+                               placeholder="请输入手机号">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-item-d">
-            <label for="address" class="form-item-label-d" style="width: 100px">地址</label>
-            <div class="form-item-content-d">
-                <div class="form-input-d">
-                    <input id="address" name="address" class="form-input-inner-d" type="text" autocomplete="off"
-                           placeholder="请输入地址">
+            <div class="form-item-d">
+                <label for="address" class="form-item-label-d" style="width: 100px">地址</label>
+                <div class="form-item-content-d">
+                    <div class="form-input-d">
+                        <input id="address" name="address" class="form-input-inner-d" type="text" autocomplete="off"
+                               placeholder="请输入地址">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-item-d" style="margin-top: 30px">
-            <label for="remark" class="form-item-label-d" style="width: 100px">备注</label>
-            <div class="form-item-content-d">
-                <div class="form-input-d">
+            <div class="form-item-d" style="margin-top: 30px">
+                <label for="remark" class="form-item-label-d" style="width: 100px">备注</label>
+                <div class="form-item-content-d">
+                    <div class="form-input-d">
                     <textarea id="remark" name="remark" class="form-input-inner-d" type="text"
                               autocomplete="off" tabindex="0" placeholder="请输入备注"
                               style="height: 100px"></textarea>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- 堂食标签页 -->
+        <div class="tab" id="dinein" style="margin-top: 25px">
+            <div class="form-item-d">
+                <label for="tableNumber" class="form-item-label-d" style="width: 100px">桌号</label>
+                <div class="form-item-content-d">
+                    <div class="form-input-d">
+                        <input id="tableNumber" name="tableNumber" class="form-input-inner-d" type="number"
+                               autocomplete="off" placeholder="请输入桌号">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item-d" style="margin-top: 30px">
+                <label for="remark1" class="form-item-label-d" style="width: 100px">备注</label>
+                <div class="form-item-content-d">
+                    <div class="form-input-d">
+                    <textarea id="remark1" name="remark1" class="form-input-inner-d" type="text"
+                              autocomplete="off" tabindex="0" placeholder="请输入备注"
+                              style="height: 100px"></textarea>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="form-item-content-d" style="float: right">
@@ -75,10 +135,27 @@
                     type="button" onclick="submitOrder()">提交订单
             </button>
         </div>
+
+
     </form>
 </div>
 </body>
 <script type="text/javascript">
+    let orderType = 0;
+
+    function switchTab(tabName) {
+        event.preventDefault();
+        // 切换标签页的逻辑
+        $('.tab').removeClass('active');
+        $('#' + tabName).addClass('active');
+        // 移除所有按钮的选中样式
+        $('.switch-buttons button').removeClass('layui-btn-warm').addClass('layui-btn-primary');
+        // 添加当前按钮的选中样式
+        $('button[data-tab="' + tabName + '"]').addClass('layui-btn-warm');
+        // 设置订单类型
+        orderType = (tabName === 'takeaway') ? 0 : 1;
+    }
+
     let shoppingCartList;
     let totalAmount;
 
@@ -124,14 +201,22 @@
     // 提交订单
     function submitOrder() {
         // 获取表单数据
+        let tableNumber = $('#tableNumber').val();
         let consignee = $('#consignee').val();
         let consigneePhone = $('#phone').val();
         let address = $('#address').val();
         let amount = totalAmount;
-        let remark = $('#remark').val();
+        let remark;
+        if (orderType === 0) {
+            remark = $('#remark').val();
+        } else {
+            remark = $('#remark1').val();
+        }
 
         // 构造order对象
         let order = {
+            orderType: orderType,
+            tableNumber: tableNumber,
             consignee: consignee,
             consigneePhone: consigneePhone,
             address: address,

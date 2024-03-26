@@ -67,33 +67,41 @@ public class OrderServiceImpl implements OrderService {
             map.put("message", "购物车为空,不能提交订单");
             return map;
         }
-        if (order.getConsignee().isEmpty()) {
-            map.put("code", -2);
-            map.put("message", "收货人为空");
-            return map;
-        }
-        if (order.getConsigneePhone().isEmpty()) {
-            map.put("code", -3);
-            map.put("message", "手机号为空");
-            return map;
-        }
-        if (order.getAddress().isEmpty()) {
-            map.put("code", -4);
-            map.put("message", "收货地址为空");
-            return map;
-        }
+        if (order.getOrderType() == 0) {
+            if (order.getConsignee().isEmpty()) {
+                map.put("code", -2);
+                map.put("message", "收货人为空");
+                return map;
+            }
+            if (order.getConsigneePhone().isEmpty()) {
+                map.put("code", -3);
+                map.put("message", "手机号为空");
+                return map;
+            }
+            if (order.getAddress().isEmpty()) {
+                map.put("code", -4);
+                map.put("message", "收货地址为空");
+                return map;
+            }
 
-        // 定义手机号的正则表达式
-        String regex = "^(1[3-9]\\d{9})$";
-        // 编译正则表达式
-        Pattern pattern = Pattern.compile(regex);
-        // 创建匹配器
-        Matcher matcher = pattern.matcher(order.getConsigneePhone());
-        // 进行匹配并返回结果
-        if (!matcher.matches()) {
-            map.put("code", -5);
-            map.put("message", "手机号格式错误");
-            return map;
+            // 定义手机号的正则表达式
+            String regex = "^(1[3-9]\\d{9})$";
+            // 编译正则表达式
+            Pattern pattern = Pattern.compile(regex);
+            // 创建匹配器
+            Matcher matcher = pattern.matcher(order.getConsigneePhone());
+            // 进行匹配并返回结果
+            if (!matcher.matches()) {
+                map.put("code", -5);
+                map.put("message", "手机号格式错误");
+                return map;
+            }
+        } else if (order.getOrderType() == 1) {
+            if (order.getTableNumber() == null) {
+                map.put("code", -2);
+                map.put("message", "桌号为空");
+                return map;
+            }
         }
 
         // 补充order属性

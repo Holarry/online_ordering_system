@@ -40,3 +40,13 @@
     text-align: center;
     height: 50px;
 }
+
+.logo {
+    text-align: center;
+    background-color: rgb(52, 55, 68);
+    padding: 46px 37px 67px 36px;
+}
+
+.img {
+    display: inline-block;
+}

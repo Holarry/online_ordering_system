@@ -5,9 +5,11 @@
 <mapper namespace="com.holary.mapper.OrderMapper">
     <!--提交订单-->
     <insert id="insertOrder">
-        insert into `order`(order_number, user_id, consignee, consignee_phone, address, amount, remark, status,
-                            order_time)
-        VALUES (#{orderNumber}, #{userId}, #{consignee}, #{consigneePhone}, #{address}, #{amount}, #{remark}, #{status},
+        insert into `order`(order_type, table_number, order_number, user_id, consignee, consignee_phone, address,
+                            amount, remark,
+                            status, order_time)
+        VALUES (#{orderType}, #{tableNumber}, #{orderNumber}, #{userId}, #{consignee}, #{consigneePhone}, #{address},
+                #{amount}, #{remark}, #{status},
                 #{orderTime})
     </insert>
 

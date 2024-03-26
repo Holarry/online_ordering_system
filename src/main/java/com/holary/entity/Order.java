@@ -22,6 +22,10 @@ public class Order {
     private Integer id;
     //订单号
     private String orderNumber;
+    //订单类型
+    private Integer orderType;
+    //桌号
+    private Integer tableNumber;
     //用户id
     private Integer userId;
     // 收货人

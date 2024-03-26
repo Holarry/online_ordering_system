@@ -77,6 +77,10 @@
         </div>
         <c:if test="${loop.index == orderDetailList.size() - 1}">
             <div class="item-box">
+                <span class="label">备注: </span>
+                <span class="des">${orderDetail.remark}</span>
+            </div>
+            <div class="item-box">
                 <span class="label">订单时间: </span>
                 <span class="des"><fmt:formatDate
                         value="${orderDetail.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/>

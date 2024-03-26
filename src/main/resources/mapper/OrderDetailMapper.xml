@@ -17,8 +17,7 @@
     <select id="selectByOrderNumber" resultType="com.holary.dto.OrderDetailDto">
         SELECT od.*,
                u.username,
-               o.status,
-               o.order_time
+               o.*
         FROM order_detail od
                  INNER JOIN
              `order` o
@@ -35,8 +34,7 @@
     <select id="selectByUserIdAndOrderNumber" resultType="com.holary.dto.OrderDetailDto">
         SELECT od.*,
                u.username,
-               o.status,
-               o.order_time
+               o.*
         FROM order_detail od
                  INNER JOIN
              `order` o

@@ -19,8 +19,10 @@
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-nav-d layui-header">
-        <img src="../static/images/logo2.jpg" alt="图片未找到"
-             style="margin-top:2%;margin-left:2%;width:10%;height:auto"/>
+        <div class="logo">
+            <img src="../static/images/logo2.jpg" alt="图片未找到"
+                 style="width: 130px; height: 60px; margin-left: 30px; margin-top: 30px"/>
+        </div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block" style="margin-right: 10px">
                 <a href="javascript:">
