@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holary.mapper.CommentMapper">
+    <!--查询留言-->
+    <select id="selectAll" resultType="com.holary.dto.CommentDto">
+        select c.*, u.username
+        from comment c
+                 inner join user u
+                            on c.user_id = u.id
+    </select>
+
+    <!--根据留言id查询留言信息-->
+    <select id="selectById" resultType="com.holary.dto.CommentDto">
+        select c.*, u.username
+        from comment c
+                 inner join user u
+                            on c.user_id = u.id
+        where c.id = #{id}
+    </select>
+
+    <!--根据留言id回复留言-->
+    <update id="updateById">
+        update comment
+        <set>
+            <if test="reply != null and reply != ''">
+                reply = #{reply},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--用户留言-->
+    <insert id="insert">
+        insert into comment(user_id, content, create_time, update_time)
+        VALUES (#{userId}, #{content}, #{createTime}, #{updateTime})
+    </insert>
+</mapper>

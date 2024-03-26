@@ -112,6 +112,16 @@ public class SystemController {
     }
 
     /**
+     * description: 跳转留言管理
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goCommentList")
+    public String goCommentList() {
+        return "admin/comment-list";
+    }
+
+    /**
      * description: 跳转菜单列表
      *
      * @return: java.lang.String
@@ -149,6 +159,26 @@ public class SystemController {
     @RequestMapping("/goUserOrderList")
     public String goUserOrderList() {
         return "user/order-list";
+    }
+
+    /**
+     * description: 跳转留言广场
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goUserCommentList")
+    public String goUserCommentList() {
+        return "user/comment-list";
+    }
+
+    /**
+     * description: 跳转添加留言
+     *
+     * @return: java.lang.String
+     */
+    @RequestMapping("/goCommentAdd")
+    public String goCommentAdd() {
+        return "user/comment-add";
     }
 
     /**

@@ -66,6 +66,12 @@
                             <span>订单管理</span>
                         </a>
                     </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="../sys/goCommentList" target="right">
+                            <i class="layui-icon layui-icon-reply-fill"></i>
+                            <span>留言管理</span>
+                        </a>
+                    </li>
                 </shiro:hasRole>
 
                 <shiro:hasRole name="普通用户">
@@ -85,6 +91,12 @@
                         <a href="../sys/goUserOrderList" target="right">
                             <i class="layui-icon layui-icon-notice"></i>
                             <span>我的订单</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item-d layui-nav-item">
+                        <a href="../sys/goUserCommentList" target="right">
+                            <i class="layui-icon layui-icon-reply-fill"></i>
+                            <span>留言广场</span>
                         </a>
                     </li>
                     <li class="layui-nav-item-d layui-nav-item">
